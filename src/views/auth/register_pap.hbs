@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>ld_registration_pap</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://kit.fontawesome.com/14fac1d4b2.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' media='screen' href='/vendor/bootstrap/css/bootstrap.min.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/register.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="/"><img src="/media/imkk_logo.png" alt=""></a>
+            {{!-- <h5>Leo Davelaar Muziekschool</h5> --}}
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <div class="register-header">
+                <h3>Instituto Di Musika Kristian Kòrsou</h3>
+                <p>Registrashon Kurso Di Piano na Kòrsou</p>
+            </div>
+            <form action="post" id="ld_reg_form_pap">
+                <div class="row">
+                    <div class="col-lg-12 d-flex justify-content-center align-items-center flex-column">
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                <label for="imageUpload"></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="avatar-text text-center">Subi un potrèt di bo</h5>
+                    </div>
+                </div>
+                <div class="row mt-4 d-flex justify-content-center align-items-center flex-column">
+                    <h3 class="stud-text mb-25">Login data</h3>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label>Ken ami ta?</label>
+                        <select name="ken" id="ken" class="reg-input" required>
+                            <option value="" disabled selected>Ken ami ta?</option>
+                            <option value="Mayor of voogd">Mayor of voogd</option>
+                            <option value="Studiante">Studiante</option>
+                            <option value="Mayor di edad">Mayor di edad</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Username</label>
+                        <input type="text" class="reg-input" placeholder="Username" name="username_pap"
+                            id="username_pap" disabled>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Password</label>
+                        <input type="password" class="reg-input" placeholder="Password" id="password_pap"
+                            name="password_pap" required>
+                        <div class="registrationFormAlert" id="CheckPasswordMatch1"></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Confirm password</label>
+                        <input type="password" class="reg-input" placeholder="Confirm password" id="passwordC_pap"
+                            name="passwordC_pap" required>
+                        <div class="registrationFormAlert" id="CheckPasswordMatch"></div>
+                    </div>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label>Nòmber</label>
+                        <input type="text" class="reg-input" placeholder="Nòmber" id="name_pap" name="name_pap"
+                            required>
+                        <p class="stud_p" id="stud_p_pap">Si bo ta un mayor of Voogd, jena aki nomber di e menor di
+                            edat.</p>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Di dos nòmber</label>
+                        <input type="text" class="reg-input" placeholder="Di dos nòmber" id="middlename_pap"
+                            name="middlename_pap">
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Fam</label>
+                        <input type="text" class="reg-input" placeholder="Fam" id="lastname_pap" name="lastname_pap"
+                            required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Fecha di nasementu</label>
+                        <input type="text" class="reg-input" placeholder="e.g 12/05/1998" id="age_pap" name="age_pap"
+                            required>
+                    </div>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label>Adrès</label>
+                        <input type="text" class="reg-input" placeholder="Adrès" id="address_pap" name="address_pap"
+                            required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Bario</label>
+                        <input type="text" class="reg-input" placeholder="Bario" id="bario" name="bario" required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Pastor</label>
+                        <input type="text" class="reg-input" placeholder="Pastor" id="pastor" name="pastor" required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Iglesia</label>
+                        <select name="igleisa" id="iglesia" class="reg-input" required>
+                            <option value="" disabled selected>Selekta bo iglesia</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label> Bo telefòn</label>
+                        <input type="text" class="reg-input" placeholder="Telefòn" name="telefoon_pap" id="telefoon_pap"
+                            required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Telefòn emergensia</label>
+                        <input type="text" class="reg-input" placeholder="Telefòn emergensia" name="telefoon_emer"
+                            id="telefoon_emer" required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Email</label>
+                        <input type="text" class="reg-input" placeholder="Email" id="email_pap" name="email_pap"
+                            required>
+                    </div>
+                </div>
+                <div class="row mb-25 mt-5">
+                    <div class="col-lg-12">
+                        <h3>Extra pregunta</h3>
+                    </div>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label>Konosementu previo</label>
+                        <select name="konosementu" id="konosementu" class="reg-input" required>
+                            <option value="" disabled selected>Konosementu previo</option>
+                            <option value="">Prinsipiante (beginner)</option>
+                            <option value="">Mi por toka piano un tiki</option>
+                            <option value="">Mi a yega di sigui lesnan di piano</option>
+                            <option value="">Mi por lesa note</option>
+                            <option value="">Mi por toka akortnan</option>
+                            <option value="">Mi por toka kaba pero ke sigui desaroya</option>
+                            <option value="">Mi por toka otro instrument</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Kiko ta bo meta final</label>
+                        <select name="meta" id="meta" class="reg-input" required>
+                            <option value="" disabled selected>Kiko ta bo meta final</option>
+                            <option value="">Kompronde i siña toka piano</option>
+                            <option value="">Siña kompaña mi riba piano</option>
+                            <option value="">Toka den iglesia</option>
+                            <option value="">Toka den banda</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Kua trajekto bo kier sigi</label>
+                        <select name="trajekto" id="trajekto" class="reg-input" required>
+                            <option value="" disabled selected>Kua trajekto bo kier sigi</option>
+                            <option value="">Mucha (6 pa 12)</option>
+                            <option value="">Tiner (13 pa 17)</option>
+                            <option value="">Hoben - Hymnalskool</option>
+                            <option value="">Hoben - P&Wskool</option>
+                            <option value="">Adulto - Hymnalskool</option>
+                            <option value="">Adulto - P&Wskool</option>
+                            <option value="">60 plus - Hymnalskool</option>
+                            <option value="">60 plus - P&Wskool</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-25 mt-5">
+                    <p class="text-uppercase font-weight-bold mt-4">Lesa e termino i kondishon nan aki prome bo sigui,
+                        klik riba termino i kondishon pa por lesanan.</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" required
+                            oninvalid="this.setCustomValidity('Checke box pa sigui')"
+                            oninput="this.setCustomValidity('')">
+                        <label class="form-check-label font-weight-normal">
+                            Mi ta bai di akuerdo ku e <a href="" download="/document/term_condition_pap.pdf">termino i
+                                kondishonnan</a>.
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="reg-sendButton">Manda</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="footer">
+        <div class="lowerbar">
+            <p>@Instituto di Musika Kristian Kòrsou</p>
+        </div>
+    </section>
+    <div class="modal_body">
+<div id="modal-container" class="six">
+        <div class="modal-background">
+            <div class="modal_pre">
+                <h2>Bon Bini</h2>
+                <p>Registra aki pa por<br> kuminsa ku bo lès piano</p>
+                <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                    preserveAspectRatio="none">
+                    <rect x="0" y="0" fill="none" width="316" height="200" rx="3" ry="3"></rect>
+                </svg>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+</body>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.all.min.js"></script>
+<script src='/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script src='/js/register_pap.js'></script>
+
+</html>

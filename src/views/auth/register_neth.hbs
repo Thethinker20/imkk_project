@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>ld_registration_neth</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://kit.fontawesome.com/14fac1d4b2.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' media='screen' href='/vendor/bootstrap/css/bootstrap.min.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/register.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="/"><img src="/media/logo_bg.png" alt=""></a>
+            {{!-- <h5>Leo Davelaar Muziekschool</h5> --}}
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <div class="register-header">
+                <h3>NED Christelijke Muziek Instituut</h3>
+                <p>Inschrijving voor piano lessen in Nederland</p>
+            </div>
+            <form action="post" id="ld_reg_form_neth">
+                <div class="row">
+                    <div class="col-lg-12 d-flex justify-content-center align-items-center flex-column">
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                <label for="imageUpload"></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="avatar-text text-center">Upload een afbeelding van jou</h5>
+                    </div>
+                </div>
+                <div class="row mt-4 d-flex justify-content-center align-items-center flex-column">
+                    <h3 class="stud-text mb-25">Login gegevens</h3>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label>Ik ben</label>
+                        <select name="ikben" id="ikben" class="reg-input" required>
+                            <option value="" disabled selected>Ik ben</option>
+                            <option value="Een ouder of voogd">Een ouder of voogd</option>
+                            <option value="Een student">Een student</option>
+                            <option value="Een volwassen">Een volwassen</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Gebruikersnaam</label>
+                        <input type="text" class="reg-input" placeholder="Username" name="username" id="username"
+                            disabled>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Wachtwoord</label>
+                        <input type="password" class="reg-input" placeholder="Password" id="password" name="password">
+                        <div class="registrationFormAlert" id="CheckPasswordMatch1"></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Bevestig Wachtwoord</label>
+                        <input type="password" class="reg-input" placeholder="Confirm password" id="passwordC"
+                            name="passwordC">
+                        <div class="registrationFormAlert" id="CheckPasswordMatch"></div>
+                    </div>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label>Naam student</label>
+                        <input type="text" class="reg-input" placeholder="Naam student" id="name" name="name" required>
+                        <p class="stud_p" id="stud_p">Ben je een Ouder of Voogd, vul de naam van de minderjarige in.</p>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Middelnaam</label>
+                        <input type="text" class="reg-input" placeholder="Middelnaam" id="middlename" name="middlename">
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Achternaam</label>
+                        <input type="text" class="reg-input" placeholder="Achternaam" id="lastname" name="lastname"
+                            required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Geboortedatum</label>
+                        <input type="text" class="reg-input" placeholder="e.g 12/05/1998" id="age" name="age" required>
+                    </div>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label>Address</label>
+                        <input type="text" class="reg-input" placeholder="Address" id="address" name="address">
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Land</label>
+                        <select name="country" id="country" class="reg-input" required>
+                            <option value="" disabled selected>Selecteer je land</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Staat</label>
+                        <select name="state" id="state" class="reg-input">
+                            <option value="" disabled selected>Selecteer je staat</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Stad</label>
+                        <select name="city" id="city" class="reg-input">
+                            <option value="" disabled selected>Selecteer je stad</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label>Telefoon</label>
+                        <input type="text" class="reg-input" placeholder="Telefoon" name="telefoon" id="telefoon"
+                            required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Email</label>
+                        <input type="text" class="reg-input" placeholder="Email" id="email" name="email">
+                    </div>
+                </div>
+                <div class="row mb-25 mt-5">
+                    <div class="col-lg-12">
+                        <h3>Extra vragen</h3>
+                    </div>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label>Wat is je voorkennis</label>
+                        <select name="voorkennis" id="voorkennis" class="reg-input" required>
+                            <option value="" disabled selected>Wat is je voorkennis</option>
+                            <option value="">Ik ben een beginner</option>
+                            <option value="">Ik weet een beetje van piano spelen</option>
+                            <option value="">Ik heb eerder pianolessen gevolgd</option>
+                            <option value="">Ik kan noten lezen</option>
+                            <option value="">Ik kan akkorden spelen</option>
+                            <option value="">Ik ka al spelen maar will verder ontwikkelen</option>
+                            <option value="">Andere instrumenten, ik will piano beheersen</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Wat wil je bereiken</label>
+                        <select name="bereiken" id="bereiken" class="reg-input" required>
+                            <option value="" disabled selected>Wat wil je bereiken</option>
+                            <option value="">Muziek begrijpen en spelen</option>
+                            <option value="">Mezelf kunnen begelieden</option>
+                            <option value="">In de kerk spelen</option>
+                            <option value="">In een band/groep spelen</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Welke Les traject wilt u volgen</label>
+                        <select name="traject" id="traject" class="reg-input" required>
+                            <option value="" disabled selected>Welke Les traject wilt u volgen</option>
+                            <option value="">Beginner (kind tot 18)</option>
+                            <option value="">Beginner 18+</option>
+                            <option value="">Piano voor zangers</option>
+                            <option value="">Gevorderde (kind tot 18)</option>
+                            <option value="">Gevorderde 18+</option>
+                            <option value="">Hymnal skool</option>
+                            <option value="">Praise and Workship skool</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Hoe wil ik les nemen?</label>
+                        <select name="nemen" id="nemen" class="reg-input" required>
+                            <option value="" disabled selected>Hoe wil ik les nemen?</option>
+                            <option value="">Online</option>
+                            <option value="">Live</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-25 mt-5">
+                    <div class="form-check ml-3">
+                        <input class="form-check-input" type="checkbox" value="" required>
+                        <label class="form-check-label">
+                            Ik ga akkoord met deze <a href="" download="/document/term_condition_neth.pdf">algemene voorwaarden</a>.
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="reg-sendButton">Versturen</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="footer">
+        <div class="lowerbar">
+            <p>©ld_muziekschool</p>
+        </div>
+    </section>
+</body>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.all.min.js"></script>
+<script src='/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script src='/js/register_neth.js'></script>
+
+</html>
