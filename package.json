@@ -1,31 +1,52 @@
 {
-  "name": "imkk",
+  "name": "loe_davelaar_portal",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "Classes\r By default turstudiante ora registra lo ta den beginner klas, e admin lo tiin ku assign tur studiante na nan respektivo class",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node server.js",
-    "start": "node server.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fullcalendar/core": "^5.6.0",
+    "@fullcalendar/daygrid": "^5.6.0",
+    "aws-amplify": "^4.3.33",
+    "aws-sdk": "^2.1206.0",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "dotenv-safe": "^8.2.0",
+    "exphbs": "^1.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.0",
+    "express-session": "^1.17.3",
+    "fs": "0.0.1-security",
+    "http": "^0.0.1-security",
+    "https": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash.merge": "^4.6.2",
+    "mongoose": "^5.12.3",
+    "mongoskin": "^0.3.7",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.7.8",
+    "nodemailer-express-handlebars": "^5.0.0",
+    "path": "^0.12.7",
+    "request": "^2.88.2",
+    "superagent": "^6.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Thethinker20/imkk_project.git"
+    "url": "git+https://github.com/Thethinker20/LD_muziekschool.git"
   },
-  "keywords": [
-    "imkk"
-  ],
-  "author": "Nathaniel",
-  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Thethinker20/imkk_project/issues"
+    "url": "https://github.com/Thethinker20/LD_muziekschool/issues"
   },
-  "homepage": "https://github.com/Thethinker20/imkk_project#readme",
-  "dependencies": {
-    "axios": "^0.27.2",
-    "express": "^4.18.1",
-    "mongoose": "^6.5.4",
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.19"
-  }
+  "homepage": "https://github.com/Thethinker20/LD_muziekschool#readme"
 }
