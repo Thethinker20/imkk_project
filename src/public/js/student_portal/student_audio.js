@@ -47,6 +47,8 @@ const result = await fetch("/get_audio_files", {
     }),
 }).then((res) => res.json());
 audioArray = result.data;
+console.log(audioArray);
+
 var level2_name = result.level2N;
 document.getElementById("i_stud_level").innerText = tokenStudent.level+ " - " +level2_name;
 var jsonData;
@@ -67,8 +69,9 @@ function getDuration(src) {
 
 
 audioArray.forEach(function (column) {
-    const musicNameRemove = column.match(/(?<=\-).+?(?=\.)/g).join('');
-    const filename = column.replace('.mp3', '');
+    const song_name =  JSON.stringify(column.Key)
+    const musicNameRemove = song_name.match('[^/]*$').join('');
+    const filename = musicNameRemove.replace('.mp3', '').replace('"', '');
     const tempTemplate = { track: (++i), name: musicNameRemove, duration:"",file: filename };
     jsonData = JSON.parse(JSON.stringify(tempTemplate));
     target.push(jsonData);
@@ -92,9 +95,9 @@ if (supportsAudio) {
     
 
     if (stud_level == "Accord Method 1") {
-        mediaPath = '/media/audios/akord_metodo_1/'
+        mediaPath = 'https://audios-imkk.s3.amazonaws.com/akord_metodo_1/'
     } else if (stud_level == "Accord Method 2") {
-        mediaPath = '/media/audios/akord_metodo_2/'
+        mediaPath = 'https://audios-imkk.s3.amazonaws.com/akord_metodo_2/'
     } else if (stud_level == "Piano for Singers") {
         mediaPath = '/media/audios/zangers_methode_1/'
     } else if (stud_level == "Hymnal Skool") {

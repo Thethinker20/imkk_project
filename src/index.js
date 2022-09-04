@@ -20,7 +20,10 @@ const PWSkool = require("./routes/models/p&w");
 const fs = require("fs");
 var nodemailer = require('nodemailer');
 var hbs_mail = require('nodemailer-express-handlebars');
-const {API} = require('aws-amplify');
+const aws = require('aws-sdk');
+const multer = require('multer');
+const multerS3=require('multer-s3');
+require('dotenv').config();
 
 
 const app = express();
@@ -1740,66 +1743,85 @@ app.post("/change_level", async (req, res) => {
 //get audio files
 app.post("/get_audio_files", async (req, res) => {
 
-  const { stud_level, stud_id } = req.body;
+    try{
+        aws.config.setPromisesDependency();
+        aws.config.update({
+            accessKeyId: process.env.ACCESS_KEY,
+            secretAccessKey: process.env.ACCESS_SECRET,
+            region: process.env.REGION
+        });
 
+        const s3 = new aws.S3();
+        const response = await s3.listObjectsV2({
+            Bucket: 'audios-imkk',
+            Prefix: 'akord_metodo_1',
+        }).promise();
 
-
-  if (stud_level == "Accord Method 1") {
-    const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/akord_metodo_1/"))
-    res.send({ status: "202", data: result });
-  } else if (stud_level == "Accord Method 2") {
-    const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/akord_metodo_2/"))
-    res.send({ status: "202", data: result });
-  } else if (stud_level == "Piano for Singers") {
-    const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/zangers_methode_1/"))
-    res.send({ status: "202", data: result });
-  } else if (stud_level == "Hymnal Skool") {
-
-    const student_lid = await HynmalSkool.findOne({ student: stud_id });
-    const stud_level2 = student_lid.level2;
-
-
-    if (stud_level2 == "Nivel 1") {
-      const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/hmnal_school/nivel_1"))
-      res.send({ status: "202", data: result, level2N: "Nivel 1" });
-    } else if (stud_level2 == "Nivel 2") {
-      const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/hmnal_school/nivel_2"))
-      res.send({ status: "202", data: result, level2N: "Nivel 2" });
-    } else if (stud_level2 == "Nivel 3") {
-      const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/hmnal_school/nivel_3"))
-      res.send({ status: "202", data: result, level2N: "Nivel 3" });
-    } else if (stud_level2 == "Nivel 4") {
-      const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/hmnal_school/nivel_4"))
-      res.send({ status: "202", data: result, level2N: "Nivel 4" });
-    } else if (stud_level2 == "Nivel 5") {
-      const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/hmnal_school/nivel_5"))
-      res.send({ status: "202", data: result, level2N: "Nivel 5" });
+        res.send({ status: 202, data: response.Contents});
+    }catch(e){
+        console.log('error: ',e)
     }
 
-  } else if (stud_level == "P&W Skool") {
+debugger;
 
-    const student_lid = await PWSkool.findOne({ student: stud_id });
-    const stud_level2 = student_lid.level2;
 
-    if (stud_level2 == "Nivel 1") {
-      const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/p_w_school/nivel_1"))
-      res.send({ status: "202", data: result });
-    } else if (stud_level2 == "Nivel 2") {
-      const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/p_w_school/nivel_2"))
-      res.send({ status: "202", data: result });
-    } else if (stud_level2 == "Nivel 3") {
-      const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/p_w_school/nivel_3"))
-      res.send({ status: "202", data: result });
-    } else if (stud_level2 == "Nivel 4") {
-      const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/p_w_school/nivel_4"))
-      res.send({ status: "202", data: result });
-    } else if (stud_level2 == "Nivel 5") {
-      const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/p_w_school/nivel_5"))
-      res.send({ status: "202", data: result });
-    }
-  } else {
-    res.send({ status: "404", data: "Please contact the administrator." });
-  }
+//     const { stud_level, stud_id } = req.body;
+//   if (stud_level == "Accord Method 1") {
+//     const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/akord_metodo_1/"))
+//     res.send({ status: "202", data: result });
+//   } else if (stud_level == "Accord Method 2") {
+//     const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/akord_metodo_2/"))
+//     res.send({ status: "202", data: result });
+//   } else if (stud_level == "Piano for Singers") {
+//     const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/zangers_methode_1/"))
+//     res.send({ status: "202", data: result });
+//   } else if (stud_level == "Hymnal Skool") {
+
+//     const student_lid = await HynmalSkool.findOne({ student: stud_id });
+//     const stud_level2 = student_lid.level2;
+
+
+//     if (stud_level2 == "Nivel 1") {
+//       const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/hmnal_school/nivel_1"))
+//       res.send({ status: "202", data: result, level2N: "Nivel 1" });
+//     } else if (stud_level2 == "Nivel 2") {
+//       const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/hmnal_school/nivel_2"))
+//       res.send({ status: "202", data: result, level2N: "Nivel 2" });
+//     } else if (stud_level2 == "Nivel 3") {
+//       const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/hmnal_school/nivel_3"))
+//       res.send({ status: "202", data: result, level2N: "Nivel 3" });
+//     } else if (stud_level2 == "Nivel 4") {
+//       const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/hmnal_school/nivel_4"))
+//       res.send({ status: "202", data: result, level2N: "Nivel 4" });
+//     } else if (stud_level2 == "Nivel 5") {
+//       const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/hmnal_school/nivel_5"))
+//       res.send({ status: "202", data: result, level2N: "Nivel 5" });
+//     }
+
+//   } else if (stud_level == "P&W Skool") {
+
+//     const student_lid = await PWSkool.findOne({ student: stud_id });
+//     const stud_level2 = student_lid.level2;
+
+//     if (stud_level2 == "Nivel 1") {
+//       const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/p_w_school/nivel_1"))
+//       res.send({ status: "202", data: result });
+//     } else if (stud_level2 == "Nivel 2") {
+//       const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/p_w_school/nivel_2"))
+//       res.send({ status: "202", data: result });
+//     } else if (stud_level2 == "Nivel 3") {
+//       const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/p_w_school/nivel_3"))
+//       res.send({ status: "202", data: result });
+//     } else if (stud_level2 == "Nivel 4") {
+//       const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/p_w_school/nivel_4"))
+//       res.send({ status: "202", data: result });
+//     } else if (stud_level2 == "Nivel 5") {
+//       const result = fs.readdirSync(path.resolve(__dirname, "public/media/audios/p_w_school/nivel_5"))
+//       res.send({ status: "202", data: result });
+//     }
+//   } else {
+//     res.send({ status: "404", data: "Please contact the administrator." });
+//   }
 });
 
 

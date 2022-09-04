@@ -1,5 +1,6 @@
 const path = require("path");
 const merge = require("lodash.merge");
+const AWS = require('aws-sdk');
 
 /* istanbul ignore next */
 const requireProcessEnv = name => {
@@ -58,5 +59,15 @@ const config = {
       }
     }
   };
+
+
+  const SESCOnfig = {
+    accessKeyId: process.env.AWS_SECERT_KEY,
+    accessSecretKey: process.env.AWS_SECRET_KEY,
+    region: "us-east-1"
+  }
+
+  AWS.config.update(SESCOnfig);
+  var sns = new AWS.SNS();
   
   module.exports = merge(config.all, config[config.all.env]);
