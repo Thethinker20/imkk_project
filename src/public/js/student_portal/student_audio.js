@@ -71,7 +71,7 @@ function getDuration(src) {
 audioArray.forEach(function (column) {
     const song_name =  JSON.stringify(column.Key)
     const musicNameRemove = song_name.match('[^/]*$').join('');
-    const filename = musicNameRemove.replace('.mp3', '').replace('"', '').replace('-', '');
+    const filename = musicNameRemove.replace('.mp3', '').replace('"', '');
     const tempTemplate = { track: (++i), name: filename, duration:"",file: filename };
     jsonData = JSON.parse(JSON.stringify(tempTemplate));
     target.push(jsonData);
