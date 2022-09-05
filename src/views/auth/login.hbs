@@ -19,13 +19,12 @@
     <div class="main">
         <div class="row w-100 h-100 ">
             <div class="col-lg-12 h-100 ">
-                <a href="/" style="height:50px; position:absolute;"><i class="fas fa-arrow-circle-left"
-                        title="Regresar"></i></a>
-
+                <a href="/" style=" position:absolute;"><img style="height:40px;padding-top:15px;padding-left:15px;" src="https://user-images.githubusercontent.com/43387401/188461480-58d241a9-f47d-4548-ae7b-3acdb615afb5.png" alt=""></a>
+                
                 <form id="loginForm" action="POST" class="w-100 h-100 d-flex justify-content-center align-items-center">
                     <div class="row d-flex justify-content-center text-center bg_form">
-                        <div class="col-lg-7 mt-5">
-                            <img class="imgLogin" src="https://user-images.githubusercontent.com/43387401/188321037-b8bb24c1-17b4-4e19-ba81-fa8f6e359335.png" alt="">
+                        <div class="col-lg-8 mt-5">
+                            <img class="imgLogin" src="https://user-images.githubusercontent.com/43387401/188483593-c98c9e3d-686a-4312-b528-b15cd1d41063.png" alt="">
                         </div>
                         <div class="col-lg-7">
                             <div class="role">
@@ -51,17 +50,32 @@
                             </div>
                         </div>
                         <div class="col-lg-7 mt-2 inP">
-                            <p><a href="/register" class="regLink">Register</a></p>
+                            <p><a href="/language_reg" class="regLink">Register</a></p>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="loader">
+    {{!-- <div class="loader">
         <div class="circle"></div>
         <div class="circle"></div>
+    </div> --}}
+<div class="cube_test"></div>
+
+    <div class="piano_loader">
+        <div class="piano">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h2 class="piano_text">Welcome to IMKK</h2>
     </div>
+
 </body>
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.23/dist/sweetalert2.all.min.js"></script>

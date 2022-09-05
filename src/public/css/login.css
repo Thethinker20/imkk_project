@@ -9,7 +9,7 @@
 
 body{
     line-height: 1.6;
-    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-image: linear-gradient(135deg, #f5f5f5 0%, #ced0d3 100%);
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -107,7 +107,7 @@ form {
   }
   
   .imgLogin {
-    height: 90px;
+    height: 95px;
     animation: fadeIn 0.5s forwards;
     animation-delay: 0.5s;
     opacity: 0;
@@ -141,10 +141,7 @@ form {
    color:#4d4d4d;
   }
   
-  @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-  }
+  
   
   .title {
     width: 100%;
@@ -349,12 +346,107 @@ form {
     }
   }
   
+.piano_loader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.piano_text{
+  color: #000000;
+  padding-top: 20px;
+  font-size: 40px;
+  opacity: 0;
+}
+
+.piano{
+  width: 180px;
+  height: 100px;
+  background: #191919;
+  border-radius: 10px;
+  z-index: 0;
+  opacity: 0;
+}
+
+.piano span{
+  position: relative;
+  display: inline-block;
+  height: 70px;
+  width: 21px;
+  background: #fff;
+  top: 25px;
+  left: 5px;
+  align-items: center;
+  border-radius: 2px;
+}
+
+.piano span:nth-of-type(1):after,
+.piano span:nth-of-type(2):after,
+.piano span:nth-of-type(3):after,
+.piano span:nth-of-type(4):after,
+.piano span:nth-of-type(5):after,
+.piano span:nth-of-type(6):after{
+  position: absolute;
+  content: '';
+  background: #191919;
+  width: 15px;
+  height: 35px;
+  left: 15px;
+  z-index: 1;
+  animation: fadeIn 1s ease-in;
+}
+
+.piano span:nth-of-type(1){
+  opacity: 0;
+}
+.piano span:nth-of-type(2){
+  opacity: 0;
+}
+.piano span:nth-of-type(3){
+  opacity: 0;
+}
+.piano span:nth-of-type(4){
+  opacity: 0;
+}
+.piano span:nth-of-type(5){
+  opacity: 0;
+}
+.piano span:nth-of-type(6){
+  opacity: 0;
+}
+.piano span:nth-of-type(7){
+  opacity: 0;
+}
 
 .loader{
     animation: rotate 3s linear infinite;
 	height: 50px;
 	transform-origin: bottom center;
 }
+
+
+@keyframes cubeOpen {
+  0%{
+    opacity: 0;
+    width: 50px;
+    height: 50px;
+    transform: rotate(0deg);
+    transform: translate(-400px);
+  }90%{
+    width: 50px;
+    height: 50px;
+  }95%{
+    width: 100px;
+    height: 50px;
+  }
+  100%{ 
+    opacity: 1;
+    transform: rotate(180deg);
+  }
+}
+
 
 @keyframes rotate {
 	to {
@@ -382,4 +474,15 @@ form {
 	50% {
 		transform: scale(1);
 	}
+}
+
+@keyframes PianoTiles{
+  0%{
+    transform: scale(1.8);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }

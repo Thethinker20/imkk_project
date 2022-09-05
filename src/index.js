@@ -1743,6 +1743,7 @@ app.post("/change_level", async (req, res) => {
 //get audio files
 app.post("/get_audio_files", async (req, res) => {
 
+  const { stud_level, stud_id } = req.body;
     try{
         aws.config.setPromisesDependency();
         aws.config.update({
@@ -1753,7 +1754,6 @@ app.post("/get_audio_files", async (req, res) => {
 
         const s3 = new aws.S3();
 
-        const { stud_level, stud_id } = req.body;
         if (stud_level == "Accord Method 1") {
             const response = await s3.listObjectsV2({
                 Bucket: 'audios-imkk',
