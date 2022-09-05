@@ -1,12 +1,12 @@
-// $(document).bind("contextmenu",function(e) {
-//   e.preventDefault();
-//  });
+$(document).bind("contextmenu",function(e) {
+  e.preventDefault();
+ });
  
-//  $(document).keydown(function(e){
-//      if(e.which === 123){
-//         return false;
-//      }
-//  });
+ $(document).keydown(function(e){
+     if(e.which === 123){
+        return false;
+     }
+ });
 
 const loader = document.querySelector('.piano_loader');
 const main = document.querySelector('.main');

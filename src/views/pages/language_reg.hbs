@@ -70,4 +70,15 @@
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.all.min.js"></script>
 <script src='/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script>
+    $(document).bind("contextmenu",function(e) {
+  e.preventDefault();
+ });
+ 
+ $(document).keydown(function(e){
+     if(e.which === 123){
+        return false;
+     }
+ });
+</script>
 </html>
