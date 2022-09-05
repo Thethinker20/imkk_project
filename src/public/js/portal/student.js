@@ -1,13 +1,13 @@
     /* To Disable Inspect Element */
-    // $(document).bind("contextmenu",function(e) {
-    //   e.preventDefault();
-    //  });
+    $(document).bind("contextmenu",function(e) {
+      e.preventDefault();
+     });
      
-    //  $(document).keydown(function(e){
-    //      if(e.which === 123){
-    //         return false;
-    //      }
-    //  });
+     $(document).keydown(function(e){
+         if(e.which === 123){
+            return false;
+         }
+     });
 
 
 var el = document.getElementById("wrapper");
@@ -28,6 +28,7 @@ if (dash_title == "Students in the Netherlands") {
             table = $("#neth_table").DataTable({
                 responsive: true,
                 data: response,
+                pageLength: 10,
                 columns: [
                     { data: "ikben" },
                     { data: "name" },
@@ -68,6 +69,7 @@ if (dash_title == "Students in the Netherlands") {
             table = $("#pap_table").DataTable({
                 responsive: true,
                 data: response,
+                pageLength: 10,
                 columns: [
                     { data: "ken" },
                     { data: "name_pap" },

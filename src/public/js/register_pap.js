@@ -1,8 +1,12 @@
-$(document).ready(function () {
-
-  
-});
-
+$(document).bind("contextmenu",function(e) {
+    e.preventDefault();
+   });
+   
+   $(document).keydown(function(e){
+       if(e.which === 123){
+          return false;
+       }
+   });
 $('#modal-container').click(function () {
     $(this).addClass('out');
     $('body').removeClass('modal-active');

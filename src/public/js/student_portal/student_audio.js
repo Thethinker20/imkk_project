@@ -1,3 +1,13 @@
+$(document).bind("contextmenu",function(e) {
+    e.preventDefault();
+   });
+   
+   $(document).keydown(function(e){
+       if(e.which === 123){
+          return false;
+       }
+   });
+
 var el = document.getElementById("wrapper");
 var toggleButton = document.getElementById("menu-toggle");
 
@@ -50,7 +60,14 @@ audioArray = result.data;
 console.log(audioArray);
 
 var level2_name = result.level2N;
-document.getElementById("i_stud_level").innerText = tokenStudent.level+ " - " +level2_name;
+if(stud_level == "Hymnal Skool"){
+    document.getElementById("i_stud_level").innerText = tokenStudent.level+ " - " +level2_name;
+}else if(stud_level == "P&W Skool"){
+    document.getElementById("i_stud_level").innerText = tokenStudent.level+ " - " +level2_name;
+}else{
+    document.getElementById("i_stud_level").innerText = tokenStudent.level
+}
+
 var jsonData;
 var i = 0;
 var json_obj;
@@ -99,32 +116,31 @@ if (supportsAudio) {
     } else if (stud_level == "Accord Method 2") {
         mediaPath = 'https://audios-imkk.s3.amazonaws.com/akord_metodo_2/'
     } else if (stud_level == "Piano for Singers") {
-        mediaPath = '/media/audios/zangers_methode_1/'
+        mediaPath = 'https://audios-imkk.s3.amazonaws.com/piano_for_singers/'
     } else if (stud_level == "Hymnal Skool") {
         if(level2_name == "Nivel 1"){
-            mediaPath = '/media/audios/hmnal_school/nivel_1/'
+            mediaPath = 'https://audios-imkk.s3.amazonaws.com/hymnal_school/nivel_1/'
         }else if(level2_name == "Nivel 2"){
-            mediaPath = '/media/audios/hmnal_school/nivel_2/'
+            mediaPath = 'https://audios-imkk.s3.amazonaws.com/hymnal_school/nivel_2/'
         }else if(level2_name == "Nivel 3"){
-            mediaPath = '/media/audios/hmnal_school/nivel_3/'
+            mediaPath = 'https://audios-imkk.s3.amazonaws.com/hymnal_school/nivel_3/'
         }else if(level2_name == "Nivel 4"){
-            mediaPath = '/media/audios/hmnal_school/nivel_4/'
+            mediaPath = 'https://audios-imkk.s3.amazonaws.com/hymnal_school/nivel_4/'
         }else if(level2_name == "Nivel 5"){
-            mediaPath = '/media/audios/hmnal_school/nivel_5/'
+            mediaPath = 'https://audios-imkk.s3.amazonaws.com/hymnal_school/nivel_5/'
         }
-        
     } else if (stud_level == "P&W Skool") {
 
         if(level2_name == "Nivel 1"){
-            mediaPath = '/media/audios/p_w_school/nivel_1/'
+            mediaPath = 'https://audios-imkk.s3.amazonaws.com/p_w_school/nivel_1/'
         }else if(level2_name == "Nivel 2"){
-            mediaPath = '/media/audios/p_w_school/nivel_2/'
+            mediaPath = 'https://audios-imkk.s3.amazonaws.com/p_w_school/nivel_2/'
         }else if(level2_name == "Nivel 3"){
-            mediaPath = '/media/audios/p_w_school/nivel_3/'
+            mediaPath = 'https://audios-imkk.s3.amazonaws.com/p_w_school/nivel_3/'
         }else if(level2_name == "Nivel 4"){
-            mediaPath = '/media/audios/p_w_school/nivel_4/'
+            mediaPath = 'https://audios-imkk.s3.amazonaws.com/p_w_school/nivel_4/'
         }else if(level2_name == "Nivel 5"){
-            mediaPath = '/media/audios/p_w_school/nivel_5/'
+            mediaPath = 'https://audios-imkk.s3.amazonaws.com/p_w_school/nivel_5/'
         }
     }
 

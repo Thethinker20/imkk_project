@@ -1,3 +1,13 @@
+$(document).bind("contextmenu",function(e) {
+    e.preventDefault();
+   });
+   
+   $(document).keydown(function(e){
+       if(e.which === 123){
+          return false;
+       }
+   });
+
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

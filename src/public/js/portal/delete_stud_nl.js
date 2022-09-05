@@ -3,15 +3,15 @@ $(document).ready(function () {
   });
   
     /* To Disable Inspect Element */
-    // $(document).bind("contextmenu",function(e) {
-    //   e.preventDefault();
-    //  });
+    $(document).bind("contextmenu",function(e) {
+      e.preventDefault();
+     });
      
-    //  $(document).keydown(function(e){
-    //      if(e.which === 123){
-    //         return false;
-    //      }
-    //  });
+     $(document).keydown(function(e){
+         if(e.which === 123){
+            return false;
+         }
+     });
 
 
 var el = document.getElementById("wrapper");
@@ -30,6 +30,7 @@ function get_table(){
             table = $("#edit_neth_table").DataTable({
                 responsive: true,
                 data: response,
+                pageLength: 10,
                 columns: [
                     { data: "username" },
                     { data: "name" },
