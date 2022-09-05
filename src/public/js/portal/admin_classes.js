@@ -466,7 +466,6 @@ async function changeLevel(event) {
     var level;
     if(country_name == "Curacao"){
         student_id = document.getElementById("name_student_cur").value;
-        console.log(student_id);
         level = document.getElementById("level_student_cur").value;
     }else{
         student_id = document.getElementById("name_student_neth").value;

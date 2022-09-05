@@ -1865,6 +1865,21 @@ debugger;
 });
 
 
+app.post("/is_paid_stud", async (req, res)=>{
+    const {stud_id, isPaid_stat} = req.body;
+
+    if(isPaid_stat == "true"){
+        const isPaid = await Student_pap.updateOne({ _id: stud_id }, { paid: "true" });
+        res.send({status:"202", msg:"Student payment/access updated"});
+    }else if(isPaid_stat == "false"){
+        const isPaid = await Student_pap.updateOne({ _id: stud_id }, { paid: "false" });
+        res.send({status:"202", msg:"Student payment/access updated"});
+    }else{
+        res.send({status:"404", msg:"Student payment/access has not been updated"});
+    }
+    
+});
+
 // Routes
 app.use(require("./routes"));
 app.use(express.static(path.join(__dirname, "public")));
