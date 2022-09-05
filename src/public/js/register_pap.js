@@ -7,6 +7,7 @@ $(document).bind("contextmenu",function(e) {
           return false;
        }
    });
+   
 $('#modal-container').click(function () {
     $(this).addClass('out');
     $('body').removeClass('modal-active');

@@ -1,12 +1,18 @@
-$(document).bind("contextmenu",function(e) {
-    e.preventDefault();
-   });
+// $(document).bind("contextmenu",function(e) {
+//     e.preventDefault();
+//    });
    
-   $(document).keydown(function(e){
-       if(e.which === 123){
-          return false;
-       }
-   });
+//    $(document).keydown(function(e){
+//        if(e.which === 123){
+//           return false;
+//        }
+//    });
+
+      
+$('#modal-container').click(function () {
+    $(this).addClass('out');
+    $('body').removeClass('modal-active');
+});
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -217,18 +223,18 @@ async function registerUser(event) {
       nemen
     }),
   }).then((res) => res.json());
-
-  if (result.status === "ok") {
-    // everythign went fine
-    //window.location.replace("/succesful");
+  if (result.status == "202") {
     Swal.fire({
         icon: "success",
-        title: "Gefeliciteerd, je account is succesvol aangemaakt",
-      });
-  } else {
+        title: result.data,
+    });
+    setTimeout(() => {
+        window.location.replace("/login");
+    }, 3000);
+} else {
     Swal.fire({
         icon: "error",
-        title: result.error,
-      });
-  }
+        title: result.data,
+    });
+}
 }

@@ -49,7 +49,7 @@ const studentPSchema = new mongoose.Schema({
   },
   konosementu: {
     type: String,
-    required: false,
+    required: true,
   },
   meta: {
     type: String,
@@ -61,7 +61,7 @@ const studentPSchema = new mongoose.Schema({
   },
   iglesia: {
     type: String,
-    required: true,
+    required: false,
   },
   email_pap: {
     type: String,
