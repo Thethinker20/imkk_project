@@ -13,6 +13,7 @@ body{
   background-repeat: repeat;
   height: 100vh;
   width: 100%;
+  animation: fade_in 2.1s ease-in;
 }
 .section-center{
   position: absolute;
@@ -41,22 +42,13 @@ body{
    
 
 
-h1{
+.section-center h1{
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
-  /* font-size: 7vw;
-  line-height: 1;
-  color: #ffeba7;
-  text-align: center;
-  -webkit-text-stroke: 2px #ffeba7;
-  text-stroke: 2px #ffeba7;
-  -webkit-text-fill-color: transparent;
-  text-fill-color: transparent;
-  color: transparent; */
   animation: float 4.8s ease-in infinite;
 }
 
-h5{
+.section-center h5{
     animation: float 4.5s ease-in infinite;
 }
 
@@ -331,6 +323,7 @@ h5{
 }
 
 
+
 .piano_keys{
     display: flex;
     position: relative;
@@ -372,6 +365,7 @@ h5{
     transform: scaleX(1.1);
 }
 
+
   
   .Db4-key {
     left: 22px;
@@ -400,14 +394,7 @@ h5{
   .Eb5-key {
     left: 310px;
   }
-  .Db4-key1 {
-    left: 22px;
-  }
-  
-  .Eb4-key1 {
-    left: 58px;
-  }
-  
+
   .Gb4-key1 {
     left: 382px;
   }
@@ -525,10 +512,10 @@ h5{
   }
   .sym_2 img{
     position: absolute;
-    top: 10px;
+    top: -100px;
     left: 150px;
     height: 35px;
-    animation: flyUp 17s ease-in infinite;
+    animation: flyUp 17s ease-in infinite,  fade_in 9.2s ease-in;
     opacity: 30%;
   }
   .sym_3 img{
@@ -536,7 +523,7 @@ h5{
     top: 10px;
     left: 100px;
     height: 35px;
-    animation: flyUp 22s ease-in infinite;
+    animation: flyUp 22s ease-in infinite,  fade_in 9s ease-in;
     opacity: 30%;
   }
   .sym_4 img{
@@ -549,10 +536,10 @@ h5{
   }
   .sym_5 img{
     position: absolute;
-    top: 10px;
+    top: -410px;
     left: 250px;
     height: 35px;
-    animation: flyUp 35s ease-in infinite;
+    animation: flyUp 35s ease-in infinite,  fade_in 9.6s ease-in;
     opacity: 30%;
   }
   .sym_6 img{
@@ -568,7 +555,7 @@ h5{
     top: 10px;
     left: 650px;
     height: 35px;
-    animation: flyUp 30s ease-in infinite;
+    animation: flyUp 30s ease-in infinite,  fade_in 9.4s ease-in;
     opacity: 30%;
   }
   .sym_8 img{
@@ -581,10 +568,10 @@ h5{
   }
   .sym_9 img{
     position: absolute;
-    top: 10px;
+    top: -210px;
     left: 800px;
     height: 35px;
-    animation: flyUp 20s ease-in infinite;
+    animation: flyUp 20s ease-in infinite,  fade_in 8s ease-in;
     opacity: 30%;
   }
   .sym_10 img{
@@ -600,15 +587,15 @@ h5{
     top: 10px;
     left: 850px;
     height: 35px;
-    animation: flyUp 30s ease-in infinite;
+    animation: flyUp 30s ease-in infinite,  fade_in 9.8s ease-in;
     opacity: 30%;
   }
   .sym_12 img{
     position: absolute;
-    top: 10px;
+    top: -350px;
     left: 1100px;
     height: 35px;
-    animation: flyUp 25s ease-in infinite;
+    animation: flyUp 25s ease-in infinite,  fade_in 10s ease-in;
     opacity: 30%;
   }
   .sym_13 img{
@@ -616,7 +603,7 @@ h5{
     top: 10px;
     left: 580px;
     height: 35px;
-    animation: flyUp 88s ease-in infinite;
+    animation: flyUp 31s ease-in infinite;
     opacity: 30%;
   }
 
@@ -636,6 +623,367 @@ h5{
     font-size: 80px;
   }
 
+
+    @media screen and (min-width: 1600px) {
+    .piano_body{
+      padding-top: 270px;
+  }
+  .white-key{
+    width: 50px;
+    height: 180px;
+  }
+  .black-key {
+    width: 30px;
+    height: 110px;
+  }
+  .Db4-key {
+    left: 28px;
+  }
+  
+  .Eb4-key {
+    left: 73px;
+  }
+  
+  .Gb4-key {
+    left: 163px;
+  }
+  
+  .Ab4-key {
+    left: 208px;
+  }
+  
+  .Bb4-key {
+    left: 253px;
+  }
+  
+  .Db5-key {
+    left: 345px;
+  }
+  
+  .Eb5-key {
+    left: 389px;
+  }
+
+  .Gb4-key1 {
+    left: 480px;
+  }
+  
+  .Ab4-key1 {
+    left: 571px;
+  }
+  
+  .Bb4-key1 {
+    left: 662px;
+  }
+  
+  .Db5-key1 {
+    left: 526px;
+  }
+  
+  .Eb5-key1 {
+    left: 707px;
+  }
+  /* row key  */
+  .Db4-key2 {
+    left: 797px;
+  }
+  
+  .Eb4-key2 {
+    left: 843px;
+  }
+  
+  .Gb4-key2 {
+    left: 887px;
+  }
+  
+  .Ab4-key2 {
+    left: 979px;
+  }
+  
+  .Bb4-key2 {
+    left: 1023px;
+  }
+  
+  .Db5-key2 {
+    left: 1113px;
+  }
+  
+  .Eb5-key2 {
+    left: 1160px;
+  }
+  /* row key 3 */
+  .Db4-key3 {
+    left: 1205px;
+  }
+  
+  .Eb4-key3 {
+    left: 1294px;
+  }
+  
+  .Gb4-key3 {
+    left: 1341px;
+  }
+  
+  .Ab4-key3 {
+    left: 1430px;
+  }
+  
+  .Bb4-key3 {
+    left: 1475px;
+  }
+  
+  .Db5-key3 {
+    left: 1520px;
+  }
+  
+  .Eb5-key3 {
+    left: 1611px;
+  }
+  
+  /* key row 4 */
+  
+  .Db5-key4{
+    left: 1656px;
+  }
+  .Eb5-key4{
+    left: 1747px;
+  }
+  
+  .Gb4-key4 {
+    left: 1791px;
+  }
+  
+  .Ab4-key4 {
+    left: 1837px;
+  }
+
+  .sym_1 img{
+    display:none;
+  }
+  .sym_2 img{
+    display:none;
+  }
+  .sym_3 img{
+    display:none;
+  }
+  .sym_4 img{
+    display:none;
+  }
+  .sym_5 img{
+    display:none;
+  }
+  .sym_6 img{
+    display:none;
+  }
+  .sym_7 img{
+   display:none;
+  }
+  .sym_8 img{
+    display:none;
+  }
+  .sym_9 img{
+    display:none;
+  }
+  .sym_10 img{
+    display:none;
+  }
+  .sym_11 img{
+    display:none;
+  }
+  .sym_12 img{
+    display:none;
+  }
+  .sym_13 img{
+    display:none;
+  }
+  }
+
+  @media screen and (min-width: 390px){
+    .section-center h1{
+      font-size: 28px;
+    }
+    .section-center h5{
+      font-size: 20px;
+    }
+
+    .white-key{
+      width: 150px;
+      height: 180px;
+    }
+    .black-key {
+      width: 30px;
+      height: 110px;
+    }
+    .Db4-key {
+      left: 28px;
+    }
+    
+    .Eb4-key {
+      left: 73px;
+    }
+    
+    .Gb4-key {
+      left: 163px;
+    }
+    
+    .Ab4-key {
+      left: 208px;
+    }
+    
+    .Bb4-key {
+      left: 253px;
+    }
+    
+    .Db5-key {
+      left: 345px;
+    }
+    
+    .Eb5-key {
+      left: 389px;
+    }
+  
+    .Gb4-key1 {
+      display:none;
+    }
+    
+    .Ab4-key1 {
+      display:none;
+    }
+    
+    .Bb4-key1 {
+      display:none;
+    }
+    
+    .Db5-key1 {
+      display:none;
+    }
+    
+    .Eb5-key1 {
+      display:none;
+    }
+    /* row key  */
+    .Db4-key2 {
+      display:none;
+    }
+    
+    .Eb4-key2 {
+      display:none;
+    }
+    
+    .Gb4-key2 {
+      display:none;
+    }
+    
+    .Ab4-key2 {
+    display:none;
+    }
+    
+    .Bb4-key2 {
+      display:none;
+    }
+    
+    .Db5-key2 {
+      display:none;
+    }
+    
+    .Eb5-key2 {
+      display:none;
+    }
+    /* row key 3 */
+    .Db4-key3 {
+      display:none;
+    }
+    
+    .Eb4-key3 {
+      display:none;
+    }
+    
+    .Gb4-key3 {
+      display:none;
+    }
+    
+    .Ab4-key3 {
+      display:none;
+    }
+    
+    .Bb4-key3 {
+      display:none;
+    }
+    
+    .Db5-key3 {
+      display:none;
+    }
+    
+    .Eb5-key3 {
+      display:none;
+    }
+    
+    /* key row 4 */
+    
+    .Db5-key4{
+      display:none;
+    }
+    .Eb5-key4{
+      display:none;
+    }
+    
+    .Gb4-key4 {
+      display:none;
+    }
+    
+    .Ab4-key4 {
+      display:none;
+    }
+  
+    .sym_1 img{
+      display:none;
+    }
+    .sym_2 img{
+      display:none;
+    }
+    .sym_3 img{
+      display:none;
+    }
+    .sym_4 img{
+      display:none;
+    }
+    .sym_5 img{
+      display:none;
+    }
+    .sym_6 img{
+      display:none;
+    }
+    .sym_7 img{
+     display:none;
+    }
+    .sym_8 img{
+      display:none;
+    }
+    .sym_9 img{
+      display:none;
+    }
+    .sym_10 img{
+      display:none;
+    }
+    .sym_11 img{
+      display:none;
+    }
+    .sym_12 img{
+      display:none;
+    }
+    .sym_13 img{
+      display:none;
+    }
+  }
+
+  @keyframes fade_in{
+    0%{
+      opacity: 0;
+    }100%{
+      opacity: 1;
+    }
+  }
+
   @keyframes float {
 	0% {
 		transform: translatey(0px);
@@ -650,7 +998,7 @@ h5{
 
 @keyframes flyUp {
     0%   { 
-    transform: rotate(0deg);		
+    transform: rotate(20deg);		
     transform: translateY(650px); 
     }
     100% { 
