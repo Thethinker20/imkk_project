@@ -624,7 +624,186 @@ body{
   }
 
 
-    @media screen and (min-width: 1600px) {
+
+  @media screen and (max-width: 390px){
+    .section-center h1{
+      font-size: 28px;
+    }
+    .section-center h5{
+      font-size: 20px;
+    }
+
+    .white-key{
+      width: 150px;
+      height: 180px;
+    }
+    .black-key {
+      width: 30px;
+      height: 110px;
+    }
+    .Db4-key {
+      left: 28px;
+    }
+    
+    .Eb4-key {
+      left: 73px;
+    }
+    
+    .Gb4-key {
+      left: 163px;
+    }
+    
+    .Ab4-key {
+      left: 208px;
+    }
+    
+    .Bb4-key {
+      left: 253px;
+    }
+    
+    .Db5-key {
+      left: 345px;
+    }
+    
+    .Eb5-key {
+      left: 303px;
+    }
+  
+    .Gb4-key1 {
+      display:none;
+    }
+    
+    .Ab4-key1 {
+      display:none;
+    }
+    
+    .Bb4-key1 {
+      display:none;
+    }
+    
+    .Db5-key1 {
+      display:none;
+    }
+    
+    .Eb5-key1 {
+      display:none;
+    }
+    /* row key  */
+    .Db4-key2 {
+      display:none;
+    }
+    
+    .Eb4-key2 {
+      display:none;
+    }
+    
+    .Gb4-key2 {
+      display:none;
+    }
+    
+    .Ab4-key2 {
+    display:none;
+    }
+    
+    .Bb4-key2 {
+      display:none;
+    }
+    
+    .Db5-key2 {
+      display:none;
+    }
+    
+    .Eb5-key2 {
+      display:none;
+    }
+    /* row key 3 */
+    .Db4-key3 {
+      display:none;
+    }
+    
+    .Eb4-key3 {
+      display:none;
+    }
+    
+    .Gb4-key3 {
+      display:none;
+    }
+    
+    .Ab4-key3 {
+      display:none;
+    }
+    
+    .Bb4-key3 {
+      display:none;
+    }
+    
+    .Db5-key3 {
+      display:none;
+    }
+    
+    .Eb5-key3 {
+      display:none;
+    }
+    
+    /* key row 4 */
+    
+    .Db5-key4{
+      display:none;
+    }
+    .Eb5-key4{
+      display:none;
+    }
+    
+    .Gb4-key4 {
+      display:none;
+    }
+    
+    .Ab4-key4 {
+      display:none;
+    }
+  
+    .sym_1 img{
+      display:none;
+    }
+    .sym_2 img{
+      display:none;
+    }
+    .sym_3 img{
+      display:none;
+    }
+    .sym_4 img{
+      display:none;
+    }
+    .sym_5 img{
+      display:none;
+    }
+    .sym_6 img{
+      display:none;
+    }
+    .sym_7 img{
+     display:none;
+    }
+    .sym_8 img{
+      display:none;
+    }
+    .sym_9 img{
+      display:none;
+    }
+    .sym_10 img{
+      display:none;
+    }
+    .sym_11 img{
+      display:none;
+    }
+    .sym_12 img{
+      display:none;
+    }
+    .sym_13 img{
+      display:none;
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
     .piano_body{
       padding-top: 270px;
   }
@@ -798,183 +977,7 @@ body{
   }
   }
 
-  @media screen and (min-width: 390px){
-    .section-center h1{
-      font-size: 28px;
-    }
-    .section-center h5{
-      font-size: 20px;
-    }
 
-    .white-key{
-      width: 150px;
-      height: 180px;
-    }
-    .black-key {
-      width: 30px;
-      height: 110px;
-    }
-    .Db4-key {
-      left: 28px;
-    }
-    
-    .Eb4-key {
-      left: 73px;
-    }
-    
-    .Gb4-key {
-      left: 163px;
-    }
-    
-    .Ab4-key {
-      left: 208px;
-    }
-    
-    .Bb4-key {
-      left: 253px;
-    }
-    
-    .Db5-key {
-      left: 345px;
-    }
-    
-    .Eb5-key {
-      left: 389px;
-    }
-  
-    .Gb4-key1 {
-      display:none;
-    }
-    
-    .Ab4-key1 {
-      display:none;
-    }
-    
-    .Bb4-key1 {
-      display:none;
-    }
-    
-    .Db5-key1 {
-      display:none;
-    }
-    
-    .Eb5-key1 {
-      display:none;
-    }
-    /* row key  */
-    .Db4-key2 {
-      display:none;
-    }
-    
-    .Eb4-key2 {
-      display:none;
-    }
-    
-    .Gb4-key2 {
-      display:none;
-    }
-    
-    .Ab4-key2 {
-    display:none;
-    }
-    
-    .Bb4-key2 {
-      display:none;
-    }
-    
-    .Db5-key2 {
-      display:none;
-    }
-    
-    .Eb5-key2 {
-      display:none;
-    }
-    /* row key 3 */
-    .Db4-key3 {
-      display:none;
-    }
-    
-    .Eb4-key3 {
-      display:none;
-    }
-    
-    .Gb4-key3 {
-      display:none;
-    }
-    
-    .Ab4-key3 {
-      display:none;
-    }
-    
-    .Bb4-key3 {
-      display:none;
-    }
-    
-    .Db5-key3 {
-      display:none;
-    }
-    
-    .Eb5-key3 {
-      display:none;
-    }
-    
-    /* key row 4 */
-    
-    .Db5-key4{
-      display:none;
-    }
-    .Eb5-key4{
-      display:none;
-    }
-    
-    .Gb4-key4 {
-      display:none;
-    }
-    
-    .Ab4-key4 {
-      display:none;
-    }
-  
-    .sym_1 img{
-      display:none;
-    }
-    .sym_2 img{
-      display:none;
-    }
-    .sym_3 img{
-      display:none;
-    }
-    .sym_4 img{
-      display:none;
-    }
-    .sym_5 img{
-      display:none;
-    }
-    .sym_6 img{
-      display:none;
-    }
-    .sym_7 img{
-     display:none;
-    }
-    .sym_8 img{
-      display:none;
-    }
-    .sym_9 img{
-      display:none;
-    }
-    .sym_10 img{
-      display:none;
-    }
-    .sym_11 img{
-      display:none;
-    }
-    .sym_12 img{
-      display:none;
-    }
-    .sym_13 img{
-      display:none;
-    }
-  }
 
   @keyframes fade_in{
     0%{
