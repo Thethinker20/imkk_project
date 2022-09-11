@@ -625,7 +625,11 @@ body{
 
 
 
-  @media screen and (max-width: 390px){
+  @media screen and (max-width: 395px){
+    .welcome h3 {
+      font-size: 40px;
+  }
+
     .section-center h1{
       font-size: 28px;
     }
@@ -642,32 +646,58 @@ body{
       height: 110px;
     }
     .Db4-key {
-      left: 28px;
+      left: 30px;
     }
     
     .Eb4-key {
-      left: 73px;
+      left: 79px;
     }
     
     .Gb4-key {
-      left: 163px;
+      left: 175px;
     }
     
     .Ab4-key {
-      left: 208px;
+      left: 224px;
     }
     
     .Bb4-key {
-      left: 253px;
+      left: 273px;
     }
     
     .Db5-key {
-      left: 345px;
+      left: 363px;
     }
     
     .Eb5-key {
-      left: 303px;
+      display:none;
     }
+    
+    .D5-key{
+      display:none;
+    }
+    .C5-key{
+      display:none;
+    }
+    .E5-key{
+      display:none;
+    }
+    .B4-key{
+      display:none;
+    }
+    .A4-key{
+      display:none;
+    }
+    .G4-key{
+      display:none;
+    }
+    .F4-key{
+      display:none;
+    }
+    .E4-key{
+      display:none;
+    }
+    
   
     .Gb4-key1 {
       display:none;
