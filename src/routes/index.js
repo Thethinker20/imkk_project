@@ -39,6 +39,10 @@ router.get("/language_reg", (req, res) => {
     res.render("pages/admin/admin_classes", { layout: false });
   });
   
+  router.get("/admin_add_materials", (req, res) => {
+    res.render("pages/admin/admin_add_materials", { layout: false });
+  });
+  
   //student portal
   router.get("/student_home_pap", (req, res) => {
     res.render("pages/student/student_home_pap", { layout: false });
@@ -56,6 +60,9 @@ router.get("/language_reg", (req, res) => {
   //email temp
   router.get("/email_temp", (req, res) => {
     res.render("email", { layout: false });
+  });
+  router.get("/tst", (req, res) => {
+    res.render("tst", { layout: false });
   });
 
 

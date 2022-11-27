@@ -21,8 +21,6 @@ const fs = require("fs");
 var nodemailer = require('nodemailer');
 var hbs_mail = require('nodemailer-express-handlebars');
 const aws = require('aws-sdk');
-const multer = require('multer');
-const multerS3=require('multer-s3');
 require('dotenv').config();
 
 
@@ -67,18 +65,6 @@ app.use(bodyParser.json());
 const JWT_SECRET =
   'sdjkfh8923yhjdksbfmad3939&"#?"?#(#>Q(()@_#(##hjb2qiuhesdbhjdsfg839ujkdhfjk';
 
-
-async function fetchhApi(){
-  API
-  .get("apiImkk", "/",{})
-    .them(response=>{
-      setMyMessage(response.success)
-      console.log(`Response:${response}`)
-    })
-    .catch(error=>{
-      console.log(error,response);
-    })
-}
 
 //login
 app.post("/login", async (req, res) => {
@@ -194,46 +180,46 @@ app.post("/register_neth", async (req, res) => {
   const password = await bcrypt.hash(plainTextPassword, 10);
   const passwordC = await bcrypt.hash(plainTextPasswordC, 10);
 
-    try {
-      const response = await Student_neth.create({
-        lang,
-        ikben,
-        username,
-        password,
-        passwordC,
-        name,
-        middlename,
-        lastname,
-        address,
-        country,
-        state,
-        city,
-        email,
-        age,
-        telefoon,
-        voorkennis,
-        bereiken,
-        traject,
-        nemen,
-      });
+  try {
+    const response = await Student_neth.create({
+      lang,
+      ikben,
+      username,
+      password,
+      passwordC,
+      name,
+      middlename,
+      lastname,
+      address,
+      country,
+      state,
+      city,
+      email,
+      age,
+      telefoon,
+      voorkennis,
+      bereiken,
+      traject,
+      nemen,
+    });
 
-      let transporter = nodemailer.createTransport({
-        service: "gmail",
-        from: "imkk2021@yahoo.com",
-        auth: {
-          user: "ld.muziekschool@gmail.com",
-          pass: "swqeaarjbnqhyzxr",
-        },
-       
-      });
-  
-      //,carldave01@gmail.com 
-  
-      let mailOption = {
-        from: "imkk2021@yahoo.com",
-        to: `${email}`,
-        subject:"Leo Davelaar Muxiekschool",
-        html: `<html lang="en">
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      from: "imkk2021@yahoo.com",
+      auth: {
+        user: "ld.muziekschool@gmail.com",
+        pass: "swqeaarjbnqhyzxr",
+      },
+
+    });
+
+    //,carldave01@gmail.com 
+
+    let mailOption = {
+      from: "imkk2021@yahoo.com",
+      to: `${email}`,
+      subject: "Leo Davelaar Muxiekschool",
+      html: `<html lang="en">
 
         <head>
             <meta charset="UTF-8">
@@ -472,30 +458,30 @@ app.post("/register_neth", async (req, res) => {
         </body>
         
         </html>`
-      };
-  
-      transporter.sendMail(mailOption, function (err, res) {
-        if(err){
-          res.send({error:"Send mail error contact administrator!"})
-        }
-      });
-  
-      //admin email send
-      let transporter_admin = nodemailer.createTransport({
-        service: "gmail",
-        from: "imkk2021@yahoo.com",
-        auth: {
-          user: "ld.muziekschool@gmail.com",
-          pass: "swqeaarjbnqhyzxr",
-        },
-       
-      });
-  
-  
-      let mailOption_admin = {
-        to: 'imkk2021@yahoo.com',
-        subject:"Student Registration IMKK",
-        html: `<html lang="en">
+    };
+
+    transporter.sendMail(mailOption, function (err, res) {
+      if (err) {
+        res.send({ error: "Send mail error contact administrator!" })
+      }
+    });
+
+    //admin email send
+    let transporter_admin = nodemailer.createTransport({
+      service: "gmail",
+      from: "imkk2021@yahoo.com",
+      auth: {
+        user: "ld.muziekschool@gmail.com",
+        pass: "swqeaarjbnqhyzxr",
+      },
+
+    });
+
+
+    let mailOption_admin = {
+      to: 'imkk2021@yahoo.com',
+      subject: "Student Registration IMKK",
+      html: `<html lang="en">
 
         <head>
             <meta charset="UTF-8">
@@ -701,23 +687,23 @@ app.post("/register_neth", async (req, res) => {
         </body>
         
         </html>`
-      };
-  
-      transporter_admin.sendMail(mailOption_admin, function (err, res) {
-        if(err){
-          res.send({error:"Send mail error contact administrator!"})
-        }
-      });
-  
-      res.send({ status:"202", data:"Registratie Compleet"});
-    } catch (error) {
-      if (error.code === 11000) {
-        // duplicate key
-        return res.json({ status: "402", data: "Gebruikersnaam al in gebruik" });
+    };
+
+    transporter_admin.sendMail(mailOption_admin, function (err, res) {
+      if (err) {
+        res.send({ error: "Send mail error contact administrator!" })
       }
-      throw error;
+    });
+
+    res.send({ status: "202", data: "Registratie Compleet" });
+  } catch (error) {
+    if (error.code === 11000) {
+      // duplicate key
+      return res.json({ status: "402", data: "Gebruikersnaam al in gebruik" });
     }
-  
+    throw error;
+  }
+
 });
 
 //register pap
@@ -777,7 +763,7 @@ app.post("/register_pap", async (req, res) => {
         user: "ld.muziekschool@gmail.com",
         pass: "swqeaarjbnqhyzxr",
       },
-     
+
     });
 
     //,carldave01@gmail.com 
@@ -785,7 +771,7 @@ app.post("/register_pap", async (req, res) => {
     let mailOption = {
       from: "imkk2021@yahoo.com",
       to: `${email_pap}`,
-      subject:"Instituto di Musika Kristian Korsou",
+      subject: "Instituto di Musika Kristian Korsou",
       html: `<html lang="en">
 
       <head>
@@ -1029,8 +1015,8 @@ app.post("/register_pap", async (req, res) => {
     };
 
     transporter.sendMail(mailOption, function (err, res) {
-      if(err){
-        res.send({error:"Send mail error contact administrator!"})
+      if (err) {
+        res.send({ error: "Send mail error contact administrator!" })
       }
     });
 
@@ -1042,13 +1028,13 @@ app.post("/register_pap", async (req, res) => {
         user: "ld.muziekschool@gmail.com",
         pass: "swqeaarjbnqhyzxr",
       },
-     
+
     });
 
 
     let mailOption_admin = {
       to: 'imkk2021@yahoo.com',
-      subject:"Instituto di Musika Kristian Korsou",
+      subject: "Instituto di Musika Kristian Korsou",
       html: `<html lang="en">
 
       <head>
@@ -1264,12 +1250,12 @@ app.post("/register_pap", async (req, res) => {
     };
 
     transporter_admin.sendMail(mailOption_admin, function (err, res) {
-      if(err){
-        res.send({error:"Send mail error contact administrator!"})
+      if (err) {
+        res.send({ error: "Send mail error contact administrator!" })
       }
     });
 
-    res.send({ status:"202", data:"Registrashon kompleta"});
+    res.send({ status: "202", data: "Registrashon kompleta" });
   } catch (error) {
     if (error.code === 11000) {
       // duplicate key
@@ -2194,140 +2180,140 @@ app.post("/change_level", async (req, res) => {
 app.post("/get_audio_files", async (req, res) => {
 
   const { stud_level, stud_id } = req.body;
-    try{
-        aws.config.setPromisesDependency();
-        aws.config.update({
-            accessKeyId: process.env.ACCESS_KEY,
-            secretAccessKey: process.env.ACCESS_SECRET,
-            region: process.env.REGION
-        });
+  try {
+    aws.config.setPromisesDependency();
+    aws.config.update({
+      accessKeyId: process.env.ACCESS_KEY,
+      secretAccessKey: process.env.ACCESS_SECRET,
+      region: process.env.REGION
+    });
 
-        const s3 = new aws.S3();
+    const s3 = new aws.S3();
 
-        if (stud_level == "Accord Method 1") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'akord_metodo_1',
-            }).promise();
-            res.send({ status: 202, data: response.Contents});
-        } else if (stud_level == "Accord Method 2") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'akord_metodo_2',
-            }).promise();
-            res.send({ status: 202, data: response.Contents});
-        } else if (stud_level == "Piano for Singers") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'piano_for_singers',
-            }).promise();
-            res.send({ status: 202, data: response.Contents});
-        } else if (stud_level == "Hymnal Skool") {
-      
-          const student_lid = await HynmalSkool.findOne({ student: stud_id });
-          const stud_level2 = student_lid.level2;
-      
-      
-          if (stud_level2 == "Nivel 1") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'hymnal_school/nivel_1',
-            }).promise();
-            res.send({ status: 202, data: response.Contents, level2N: "Nivel 1"});
+    if (stud_level == "Accord Method 1") {
+      const response = await s3.listObjectsV2({
+        Bucket: 'audios-imkk',
+        Prefix: 'akord_metodo_1',
+      }).promise();
+      res.send({ status: 202, data: response.Contents });
+    } else if (stud_level == "Accord Method 2") {
+      const response = await s3.listObjectsV2({
+        Bucket: 'audios-imkk',
+        Prefix: 'akord_metodo_2',
+      }).promise();
+      res.send({ status: 202, data: response.Contents });
+    } else if (stud_level == "Piano for Singers") {
+      const response = await s3.listObjectsV2({
+        Bucket: 'audios-imkk',
+        Prefix: 'piano_for_singers',
+      }).promise();
+      res.send({ status: 202, data: response.Contents });
+    } else if (stud_level == "Hymnal Skool") {
 
-          } else if (stud_level2 == "Nivel 2") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'hymnal_school/nivel_2',
-            }).promise();
-            res.send({ status: 202, data: response.Contents, level2N: "Nivel 2"});
-
-          } else if (stud_level2 == "Nivel 3") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'hymnal_school/nivel_3',
-            }).promise();
-            res.send({ status: 202, data: response.Contents, level2N: "Nivel 3"});
-          } else if (stud_level2 == "Nivel 4") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'hymnal_school/nivel_4',
-            }).promise();
-            res.send({ status: 202, data: response.Contents, level2N: "Nivel 4"});
-          } else if (stud_level2 == "Nivel 5") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'hymnal_school/nivel_5',
-            }).promise();
-            res.send({ status: 202, data: response.Contents, level2N: "Nivel 5"});
-          }
-      
-        } else if (stud_level == "P&W Skool") {
-      
-          const student_lid = await PWSkool.findOne({ student: stud_id });
-          const stud_level2 = student_lid.level2;
-      
-          if (stud_level2 == "Nivel 1") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'p_w_school/nivel_1',
-            }).promise();
-            res.send({ status: 202, data: response.Contents, level2N: "Nivel 1"});
-          } else if (stud_level2 == "Nivel 2") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'p_w_school/nivel_2',
-            }).promise();
-            res.send({ status: 202, data: response.Contents, level2N: "Nivel 2"});
-          } else if (stud_level2 == "Nivel 3") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'p_w_school/nivel_3',
-            }).promise();
-            res.send({ status: 202, data: response.Contents, level2N: "Nivel 3"});
-          } else if (stud_level2 == "Nivel 4") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'p_w_school/nivel_4',
-            }).promise();
-            res.send({ status: 202, data: response.Contents, level2N: "Nivel 4"});
-          } else if (stud_level2 == "Nivel 5") {
-            const response = await s3.listObjectsV2({
-                Bucket: 'audios-imkk',
-                Prefix: 'p_w_school/nivel_5',
-            }).promise();
-            res.send({ status: 202, data: response.Contents, level2N: "Nivel 5"});
-          }
-        } else {
-          res.send({ status: "404", data: "Please contact the administrator." });
-        }
+      const student_lid = await HynmalSkool.findOne({ student: stud_id });
+      const stud_level2 = student_lid.level2;
 
 
-        
-    }catch(e){
-        console.log('error: ',e)
+      if (stud_level2 == "Nivel 1") {
+        const response = await s3.listObjectsV2({
+          Bucket: 'audios-imkk',
+          Prefix: 'hymnal_school/nivel_1',
+        }).promise();
+        res.send({ status: 202, data: response.Contents, level2N: "Nivel 1" });
+
+      } else if (stud_level2 == "Nivel 2") {
+        const response = await s3.listObjectsV2({
+          Bucket: 'audios-imkk',
+          Prefix: 'hymnal_school/nivel_2',
+        }).promise();
+        res.send({ status: 202, data: response.Contents, level2N: "Nivel 2" });
+
+      } else if (stud_level2 == "Nivel 3") {
+        const response = await s3.listObjectsV2({
+          Bucket: 'audios-imkk',
+          Prefix: 'hymnal_school/nivel_3',
+        }).promise();
+        res.send({ status: 202, data: response.Contents, level2N: "Nivel 3" });
+      } else if (stud_level2 == "Nivel 4") {
+        const response = await s3.listObjectsV2({
+          Bucket: 'audios-imkk',
+          Prefix: 'hymnal_school/nivel_4',
+        }).promise();
+        res.send({ status: 202, data: response.Contents, level2N: "Nivel 4" });
+      } else if (stud_level2 == "Nivel 5") {
+        const response = await s3.listObjectsV2({
+          Bucket: 'audios-imkk',
+          Prefix: 'hymnal_school/nivel_5',
+        }).promise();
+        res.send({ status: 202, data: response.Contents, level2N: "Nivel 5" });
+      }
+
+    } else if (stud_level == "P&W Skool") {
+
+      const student_lid = await PWSkool.findOne({ student: stud_id });
+      const stud_level2 = student_lid.level2;
+
+      if (stud_level2 == "Nivel 1") {
+        const response = await s3.listObjectsV2({
+          Bucket: 'audios-imkk',
+          Prefix: 'p_w_school/nivel_1',
+        }).promise();
+        res.send({ status: 202, data: response.Contents, level2N: "Nivel 1" });
+      } else if (stud_level2 == "Nivel 2") {
+        const response = await s3.listObjectsV2({
+          Bucket: 'audios-imkk',
+          Prefix: 'p_w_school/nivel_2',
+        }).promise();
+        res.send({ status: 202, data: response.Contents, level2N: "Nivel 2" });
+      } else if (stud_level2 == "Nivel 3") {
+        const response = await s3.listObjectsV2({
+          Bucket: 'audios-imkk',
+          Prefix: 'p_w_school/nivel_3',
+        }).promise();
+        res.send({ status: 202, data: response.Contents, level2N: "Nivel 3" });
+      } else if (stud_level2 == "Nivel 4") {
+        const response = await s3.listObjectsV2({
+          Bucket: 'audios-imkk',
+          Prefix: 'p_w_school/nivel_4',
+        }).promise();
+        res.send({ status: 202, data: response.Contents, level2N: "Nivel 4" });
+      } else if (stud_level2 == "Nivel 5") {
+        const response = await s3.listObjectsV2({
+          Bucket: 'audios-imkk',
+          Prefix: 'p_w_school/nivel_5',
+        }).promise();
+        res.send({ status: 202, data: response.Contents, level2N: "Nivel 5" });
+      }
+    } else {
+      res.send({ status: "404", data: "Please contact the administrator." });
     }
 
-debugger;
+
+
+  } catch (e) {
+    console.log('error: ', e)
+    res.send({ status: "404", data: "Please contact the administrator." });
+  }
+
+  debugger;
 
 
 
 });
 
+app.post("/is_paid_stud", async (req, res) => {
+  const { stud_id, isPaid_stat } = req.body;
 
-app.post("/is_paid_stud", async (req, res)=>{
-    const {stud_id, isPaid_stat} = req.body;
+  if (isPaid_stat == "true") {
+    const isPaid = await Student_pap.updateOne({ _id: stud_id }, { paid: "true" });
+    res.send({ status: "202", msg: "Student payment/access updated" });
+  } else if (isPaid_stat == "false") {
+    const isPaid = await Student_pap.updateOne({ _id: stud_id }, { paid: "false" });
+    res.send({ status: "202", msg: "Student payment/access updated" });
+  } else {
+    res.send({ status: "404", msg: "Student payment/access has not been updated" });
+  }
 
-    if(isPaid_stat == "true"){
-        const isPaid = await Student_pap.updateOne({ _id: stud_id }, { paid: "true" });
-        res.send({status:"202", msg:"Student payment/access updated"});
-    }else if(isPaid_stat == "false"){
-        const isPaid = await Student_pap.updateOne({ _id: stud_id }, { paid: "false" });
-        res.send({status:"202", msg:"Student payment/access updated"});
-    }else{
-        res.send({status:"404", msg:"Student payment/access has not been updated"});
-    }
-    
 });
 
 // Routes

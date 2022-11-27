@@ -57,8 +57,23 @@
                 </div>
                 <a href="/admin_classes" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-landmark me-2"></i>Classes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>Material</a>
+                 <!-- Materials  Submenu content -->
+                    <a href="#submenu3" data-toggle="collapse" aria-expanded="false"
+                        class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                        <div class="d-flex w-100 justify-content-start align-items-center">
+                            <i class="fas fa-graduation-cap me-2"></i>
+                            <span class="menu-collapsed">Materials</span>
+                            <span class="submenu-icon ml-auto"></span>
+                        </div>
+                    </a>
+                    <div id='submenu3' class="collapse sidebar-submenu">
+                        <a href="/admin_add_materials" class="list-group-item list-group-item-action fw-bold">
+                            <span class="menu-collapsed">Add Materials</span>
+                        </a>
+                        <a href="/admin_nl_edit" class="list-group-item list-group-item-action fw-bold">
+                            <span class="menu-collapsed">Edit Students</span>
+                        </a>
+                    </div>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->

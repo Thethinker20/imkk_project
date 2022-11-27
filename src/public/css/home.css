@@ -344,7 +344,7 @@ body{
 }
 
 .white-key:hover{
-    transform: scaleX(1.1);
+    transform: scaleX(1.08);
 }
 
 
@@ -365,8 +365,6 @@ body{
     transform: scaleX(1.1);
 }
 
-
-  
   .Db4-key {
     left: 22px;
   }
