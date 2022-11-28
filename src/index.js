@@ -21,6 +21,7 @@ const fs = require("fs");
 var nodemailer = require('nodemailer');
 var hbs_mail = require('nodemailer-express-handlebars');
 const aws = require('aws-sdk');
+
 require('dotenv').config();
 
 
@@ -2177,125 +2178,128 @@ app.post("/change_level", async (req, res) => {
 });
 
 //get audio files
-app.post("/get_audio_files", async (req, res) => {
+app.get("/get_audio_files", async (req, res) => {
 
-  const { stud_level, stud_id } = req.body;
-  try {
-    aws.config.setPromisesDependency();
-    aws.config.update({
-      accessKeyId: process.env.ACCESS_KEY,
-      secretAccessKey: process.env.ACCESS_SECRET,
-      region: process.env.REGION
-    });
+var files = fs.readFileSync(path.resolve(__dirname,"public/media/classes_audio/akkord_methode_1/"))
+console.log(files);
 
-    const s3 = new aws.S3();
+  // const { stud_level, stud_id } = req.body;
+  // try {
+  //   aws.config.setPromisesDependency();
+  //   aws.config.update({
+  //     accessKeyId: process.env.ACCESS_KEY,
+  //     secretAccessKey: process.env.ACCESS_SECRET,
+  //     region: process.env.REGION
+  //   });
 
-    if (stud_level == "Accord Method 1") {
-      const response = await s3.listObjectsV2({
-        Bucket: 'audios-imkk',
-        Prefix: 'akord_metodo_1',
-      }).promise();
-      res.send({ status: 202, data: response.Contents });
-    } else if (stud_level == "Accord Method 2") {
-      const response = await s3.listObjectsV2({
-        Bucket: 'audios-imkk',
-        Prefix: 'akord_metodo_2',
-      }).promise();
-      res.send({ status: 202, data: response.Contents });
-    } else if (stud_level == "Piano for Singers") {
-      const response = await s3.listObjectsV2({
-        Bucket: 'audios-imkk',
-        Prefix: 'piano_for_singers',
-      }).promise();
-      res.send({ status: 202, data: response.Contents });
-    } else if (stud_level == "Hymnal Skool") {
+  //   const s3 = new aws.S3();
 
-      const student_lid = await HynmalSkool.findOne({ student: stud_id });
-      const stud_level2 = student_lid.level2;
+  //   if (stud_level == "Accord Method 1") {
+  //     const response = await s3.listObjectsV2({
+  //       Bucket: 'audios-imkk',
+  //       Prefix: 'akord_metodo_1',
+  //     }).promise();
+  //     res.send({ status: 202, data: response.Contents });
+  //   } else if (stud_level == "Accord Method 2") {
+  //     const response = await s3.listObjectsV2({
+  //       Bucket: 'audios-imkk',
+  //       Prefix: 'akord_metodo_2',
+  //     }).promise();
+  //     res.send({ status: 202, data: response.Contents });
+  //   } else if (stud_level == "Piano for Singers") {
+  //     const response = await s3.listObjectsV2({
+  //       Bucket: 'audios-imkk',
+  //       Prefix: 'piano_for_singers',
+  //     }).promise();
+  //     res.send({ status: 202, data: response.Contents });
+  //   } else if (stud_level == "Hymnal Skool") {
 
-
-      if (stud_level2 == "Nivel 1") {
-        const response = await s3.listObjectsV2({
-          Bucket: 'audios-imkk',
-          Prefix: 'hymnal_school/nivel_1',
-        }).promise();
-        res.send({ status: 202, data: response.Contents, level2N: "Nivel 1" });
-
-      } else if (stud_level2 == "Nivel 2") {
-        const response = await s3.listObjectsV2({
-          Bucket: 'audios-imkk',
-          Prefix: 'hymnal_school/nivel_2',
-        }).promise();
-        res.send({ status: 202, data: response.Contents, level2N: "Nivel 2" });
-
-      } else if (stud_level2 == "Nivel 3") {
-        const response = await s3.listObjectsV2({
-          Bucket: 'audios-imkk',
-          Prefix: 'hymnal_school/nivel_3',
-        }).promise();
-        res.send({ status: 202, data: response.Contents, level2N: "Nivel 3" });
-      } else if (stud_level2 == "Nivel 4") {
-        const response = await s3.listObjectsV2({
-          Bucket: 'audios-imkk',
-          Prefix: 'hymnal_school/nivel_4',
-        }).promise();
-        res.send({ status: 202, data: response.Contents, level2N: "Nivel 4" });
-      } else if (stud_level2 == "Nivel 5") {
-        const response = await s3.listObjectsV2({
-          Bucket: 'audios-imkk',
-          Prefix: 'hymnal_school/nivel_5',
-        }).promise();
-        res.send({ status: 202, data: response.Contents, level2N: "Nivel 5" });
-      }
-
-    } else if (stud_level == "P&W Skool") {
-
-      const student_lid = await PWSkool.findOne({ student: stud_id });
-      const stud_level2 = student_lid.level2;
-
-      if (stud_level2 == "Nivel 1") {
-        const response = await s3.listObjectsV2({
-          Bucket: 'audios-imkk',
-          Prefix: 'p_w_school/nivel_1',
-        }).promise();
-        res.send({ status: 202, data: response.Contents, level2N: "Nivel 1" });
-      } else if (stud_level2 == "Nivel 2") {
-        const response = await s3.listObjectsV2({
-          Bucket: 'audios-imkk',
-          Prefix: 'p_w_school/nivel_2',
-        }).promise();
-        res.send({ status: 202, data: response.Contents, level2N: "Nivel 2" });
-      } else if (stud_level2 == "Nivel 3") {
-        const response = await s3.listObjectsV2({
-          Bucket: 'audios-imkk',
-          Prefix: 'p_w_school/nivel_3',
-        }).promise();
-        res.send({ status: 202, data: response.Contents, level2N: "Nivel 3" });
-      } else if (stud_level2 == "Nivel 4") {
-        const response = await s3.listObjectsV2({
-          Bucket: 'audios-imkk',
-          Prefix: 'p_w_school/nivel_4',
-        }).promise();
-        res.send({ status: 202, data: response.Contents, level2N: "Nivel 4" });
-      } else if (stud_level2 == "Nivel 5") {
-        const response = await s3.listObjectsV2({
-          Bucket: 'audios-imkk',
-          Prefix: 'p_w_school/nivel_5',
-        }).promise();
-        res.send({ status: 202, data: response.Contents, level2N: "Nivel 5" });
-      }
-    } else {
-      res.send({ status: "404", data: "Please contact the administrator." });
-    }
+  //     const student_lid = await HynmalSkool.findOne({ student: stud_id });
+  //     const stud_level2 = student_lid.level2;
 
 
+  //     if (stud_level2 == "Nivel 1") {
+  //       const response = await s3.listObjectsV2({
+  //         Bucket: 'audios-imkk',
+  //         Prefix: 'hymnal_school/nivel_1',
+  //       }).promise();
+  //       res.send({ status: 202, data: response.Contents, level2N: "Nivel 1" });
 
-  } catch (e) {
-    console.log('error: ', e)
-    res.send({ status: "404", data: "Please contact the administrator." });
-  }
+  //     } else if (stud_level2 == "Nivel 2") {
+  //       const response = await s3.listObjectsV2({
+  //         Bucket: 'audios-imkk',
+  //         Prefix: 'hymnal_school/nivel_2',
+  //       }).promise();
+  //       res.send({ status: 202, data: response.Contents, level2N: "Nivel 2" });
 
-  debugger;
+  //     } else if (stud_level2 == "Nivel 3") {
+  //       const response = await s3.listObjectsV2({
+  //         Bucket: 'audios-imkk',
+  //         Prefix: 'hymnal_school/nivel_3',
+  //       }).promise();
+  //       res.send({ status: 202, data: response.Contents, level2N: "Nivel 3" });
+  //     } else if (stud_level2 == "Nivel 4") {
+  //       const response = await s3.listObjectsV2({
+  //         Bucket: 'audios-imkk',
+  //         Prefix: 'hymnal_school/nivel_4',
+  //       }).promise();
+  //       res.send({ status: 202, data: response.Contents, level2N: "Nivel 4" });
+  //     } else if (stud_level2 == "Nivel 5") {
+  //       const response = await s3.listObjectsV2({
+  //         Bucket: 'audios-imkk',
+  //         Prefix: 'hymnal_school/nivel_5',
+  //       }).promise();
+  //       res.send({ status: 202, data: response.Contents, level2N: "Nivel 5" });
+  //     }
+
+  //   } else if (stud_level == "P&W Skool") {
+
+  //     const student_lid = await PWSkool.findOne({ student: stud_id });
+  //     const stud_level2 = student_lid.level2;
+
+  //     if (stud_level2 == "Nivel 1") {
+  //       const response = await s3.listObjectsV2({
+  //         Bucket: 'audios-imkk',
+  //         Prefix: 'p_w_school/nivel_1',
+  //       }).promise();
+  //       res.send({ status: 202, data: response.Contents, level2N: "Nivel 1" });
+  //     } else if (stud_level2 == "Nivel 2") {
+  //       const response = await s3.listObjectsV2({
+  //         Bucket: 'audios-imkk',
+  //         Prefix: 'p_w_school/nivel_2',
+  //       }).promise();
+  //       res.send({ status: 202, data: response.Contents, level2N: "Nivel 2" });
+  //     } else if (stud_level2 == "Nivel 3") {
+  //       const response = await s3.listObjectsV2({
+  //         Bucket: 'audios-imkk',
+  //         Prefix: 'p_w_school/nivel_3',
+  //       }).promise();
+  //       res.send({ status: 202, data: response.Contents, level2N: "Nivel 3" });
+  //     } else if (stud_level2 == "Nivel 4") {
+  //       const response = await s3.listObjectsV2({
+  //         Bucket: 'audios-imkk',
+  //         Prefix: 'p_w_school/nivel_4',
+  //       }).promise();
+  //       res.send({ status: 202, data: response.Contents, level2N: "Nivel 4" });
+  //     } else if (stud_level2 == "Nivel 5") {
+  //       const response = await s3.listObjectsV2({
+  //         Bucket: 'audios-imkk',
+  //         Prefix: 'p_w_school/nivel_5',
+  //       }).promise();
+  //       res.send({ status: 202, data: response.Contents, level2N: "Nivel 5" });
+  //     }
+  //   } else {
+  //     res.send({ status: "404", data: "Please contact the administrator." });
+  //   }
+
+
+
+  // } catch (e) {
+  //   console.log('error: ', e)
+  //   res.send({ status: "404", data: "Please contact the administrator." });
+  // }
+
+  // debugger;
 
 
 
