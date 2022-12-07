@@ -1,12 +1,12 @@
-// $(document).bind("contextmenu",function(e) {
-//     e.preventDefault();
-//    });
+$(document).bind("contextmenu",function(e) {
+    e.preventDefault();
+   });
    
-//    $(document).keydown(function(e){
-//        if(e.which === 123){
-//           return false;
-//        }
-//    });
+   $(document).keydown(function(e){
+       if(e.which === 123){
+          return false;
+       }
+   });
 
 var el = document.getElementById("wrapper");
 var toggleButton = document.getElementById("menu-toggle");
@@ -14,7 +14,6 @@ var toggleButton = document.getElementById("menu-toggle");
 toggleButton.onclick = function () {
     el.classList.toggle("toggled");
 };
-
 
 
 var tokenStudent;
@@ -30,7 +29,7 @@ function getStudentInfo() {
             })
             .join("")
     );
-    tokenStudent = JSON.parse(jsonPayload); 
+    tokenStudent = JSON.parse(jsonPayload);
     document.getElementById("navbarDropdown").innerText = tokenStudent.name_pap;
    
 }
@@ -42,23 +41,9 @@ $('#logout_stud').on('click', function () {
 });
 
 
-
 //get audio files
 var stud_level = tokenStudent.level;
 var stud_id = tokenStudent.id;
-// console.log(stud_id)
-// var audioArray;
-// const result = await fetch("/get_audio_files", {
-//     method: "POST",
-//     headers: {
-//         "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//         stud_level,
-//         stud_id
-//     }),
-// }).then((res) => res.json());
-
 
 if(stud_level == "Hymnal Skool"){
     document.getElementById("i_stud_level").innerText = tokenStudent.level;
@@ -88,40 +73,39 @@ var url;
 
 if (stud_level == "Accord Method 1") {
     
-url = "json/akkord_methode_1/audios.json";
+url = "json/akkord_methode_1/akkord_methode.json";
 } else if (stud_level == "Accord Method 2") {
   
-var url = "json/akkord_methode_2/audios.json";
+var url = "json/akkord_methode_2/akkord_methode.json";
 } else if (stud_level == "Piano for Singers") {
-var url = "json/piano_for_singers/audios.json";
+var url = "json/piano_for_singers/piano_for_singers.json";
 } else if (stud_level == "Hymnal Skool") {
     if(level2_name == "Nivel 1"){
-        var url = "json/hymnal_school/nivel_1/audios.json";
+        var url = "json/hmnal_school/nivel_1/hymnal_skol_n_1.json";
     }else if(level2_name == "Nivel 2"){
-        var url = "json/hymnal_school/nivel_2/audios.json";
+        var url = "json/hmnal_school/nivel_2/hymnal_skol_n_2json";
     }else if(level2_name == "Nivel 3"){
-        var url = "json/hymnal_school/nivel_3/audios.json";
+        var url = "json/hmnal_school/nivel_3/hymnal_skol_n_3.json";
     }else if(level2_name == "Nivel 4"){
-        var url = "json/hymnal_school/nivel_4/audios.json";
+        var url = "json/hmnal_school/nivel_4/hymnal_skol_n_4.json";
     }else if(level2_name == "Nivel 5"){
-        var url = "json/hymnal_school/nivel_5/audios.json";
+        var url = "json/hmnal_school/nivel_5/hymnal_skol_n_5.json";
     }
 } else if (stud_level == "P&W Skool") {
 
     if(level2_name == "Nivel 1"){
-        var url = "json/p_w_school/nivel_1/audios.json";
+        var url = "json/p_w_school/nivel_1/p_w_school_n_1.json";
     }else if(level2_name == "Nivel 2"){
-        var url = "json/p_w_school/nivel_2/audios.json";
+        var url = "json/p_w_school/nivel_2/p_w_school_n_2.json";
     }else if(level2_name == "Nivel 3"){
-        var url = "json/p_w_school/nivel_3/audios.json";
+        var url = "json/p_w_school/nivel_3/p_w_school_n_3.json";
     }else if(level2_name == "Nivel 4"){
-        var url = "json/p_w_school/nivel_4/audios.json";
+        var url = "json/p_w_school/nivel_4/p_w_school_n_4.json";
     }else if(level2_name == "Nivel 5"){
-        var url = "json/p_w_school/nivel_5/audios.json";
+        var url = "json/p_w_school/nivel_5/p_w_school_n_5.json";
     }
 }
 
-var url = "json/akkord_methode_1/audios.json";
 $.getJSON(url, function (data) {
     data.forEach(function (column) {
         const song_name =  column.name
@@ -155,28 +139,28 @@ if (supportsAudio) {
         mediaPath = 'media/classes_audio/piano_for_singers/'
     } else if (stud_level == "Hymnal Skool") {
         if(level2_name == "Nivel 1"){
-        mediaPath = 'media/classes_audio/hymnal_school/nivel_1/'
+        mediaPath = 'media/classes_audio/hmnal_school/nivel_1/'
         }else if(level2_name == "Nivel 2"){
-            mediaPath = 'media/classes_audio/hymnal_school/nivel_2/'
+            mediaPath = 'media/classes_audio/hmnal_school/nivel_2/'
         }else if(level2_name == "Nivel 3"){
-            mediaPath = 'media/classes_audio/hymnal_school/nivel_3/'
+            mediaPath = 'media/classes_audio/hmnal_school/nivel_3/'
         }else if(level2_name == "Nivel 4"){
-            mediaPath = 'media/classes_audio/hymnal_school/nivel_4/'
+            mediaPath = 'media/classes_audio/hmnal_school/nivel_4/'
         }else if(level2_name == "Nivel 5"){
-            mediaPath = 'media/classes_audio/hymnal_school/nivel_5/'
+            mediaPath = 'media/classes_audio/hmnal_school/nivel_5/'
         }
     } else if (stud_level == "P&W Skool") {
 
         if(level2_name == "Nivel 1"){
-            mediaPath = 'https://audios-imkk.s3.amazonaws.com/p_w_school/nivel_1/'
+            mediaPath = 'media/classes_audio/p_w_school/nivel_1/'
         }else if(level2_name == "Nivel 2"){
-            mediaPath = 'https://audios-imkk.s3.amazonaws.com/p_w_school/nivel_2/'
+            mediaPath = 'media/classes_audio/p_w_school/nivel_2/'
         }else if(level2_name == "Nivel 3"){
-            mediaPath = 'https://audios-imkk.s3.amazonaws.com/p_w_school/nivel_3/'
+            mediaPath = 'media/classes_audio/p_w_school/nivel_3/'
         }else if(level2_name == "Nivel 4"){
-            mediaPath = 'https://audios-imkk.s3.amazonaws.com/p_w_school/nivel_4/'
+            mediaPath = 'media/classes_audio/p_w_school/nivel_4/'
         }else if(level2_name == "Nivel 5"){
-            mediaPath = 'https://audios-imkk.s3.amazonaws.com/p_w_school/nivel_5/'
+            mediaPath = 'media/classes_audio/p_w_school/nivel_5/'
         }
     }
 

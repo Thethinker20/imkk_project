@@ -1,3 +1,14 @@
+
+$(document).bind("contextmenu",function(e) {
+  e.preventDefault();
+ });
+ 
+ $(document).keydown(function(e){
+     if(e.which === 123){
+        return false;
+     }
+ });
+
 const C4 = new Audio("media/sounds/C4.mp3");
 const Db4 = new Audio("media/sounds/Db4.mp3");
 const D4 = new Audio("media/sounds/D4.mp3");

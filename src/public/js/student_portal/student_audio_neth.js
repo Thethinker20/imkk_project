@@ -30,7 +30,6 @@ function getStudentInfo() {
             .join("")
     );
     tokenStudent = JSON.parse(jsonPayload); 
-    document.getElementById("i_stud_level").innerText = tokenStudent.level;
      document.getElementById("navbarDropdown").innerText = tokenStudent.name;
    
 }
@@ -45,20 +44,15 @@ $('#logout_stud').on('click', function () {
 //get audio files
 var stud_level = tokenStudent.level;
 var stud_id = tokenStudent.id;
-var audioArray;
-const result = await fetch("/get_audio_files", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-        stud_level,
-        stud_id
-    }),
-}).then((res) => res.json());
-audioArray = result.data;var 
-level2_name = result.level2N;
-document.getElementById("i_stud_level").innerText = tokenStudent.level+ " - " +level2_name;
+
+if(stud_level == "Hymnal Skool"){
+    document.getElementById("i_stud_level").innerText = tokenStudent.level;
+}else if(stud_level == "P&W Skool"){
+    document.getElementById("i_stud_level").innerText = tokenStudent.level;
+}else{
+    document.getElementById("i_stud_level").innerText = tokenStudent.level
+}
+
 var jsonData;
 var i = 0;
 var json_obj;
@@ -75,17 +69,53 @@ function getDuration(src) {
     });
 }
 
+var url;
 
-audioArray.forEach(function (column) {
-    const musicNameRemove = column.match(/(?<=\-).+?(?=\.)/g).join('');
-    const filename = column.replace('.mp3', '');
-    const tempTemplate = { track: (++i), name: musicNameRemove, duration:"",file: filename };
-    jsonData = JSON.parse(JSON.stringify(tempTemplate));
-    target.push(jsonData);
-});
+if (stud_level == "Accord Method 1") {
+    
+url = "json/akkord_methode_1/akkord_methode.json";
+} else if (stud_level == "Accord Method 2") {
+  
+var url = "json/akkord_methode_2/akkord_methode.json";
+} else if (stud_level == "Piano for Singers") {
+var url = "json/piano_for_singers/piano_for_singers.json";
+} else if (stud_level == "Hymnal Skool") {
+    if(level2_name == "Nivel 1"){
+        var url = "json/hmnal_school/nivel_1/hymnal_skol_n_1.json";
+    }else if(level2_name == "Nivel 2"){
+        var url = "json/hmnal_school/nivel_2/hymnal_skol_n_2json";
+    }else if(level2_name == "Nivel 3"){
+        var url = "json/hmnal_school/nivel_3/hymnal_skol_n_3.json";
+    }else if(level2_name == "Nivel 4"){
+        var url = "json/hmnal_school/nivel_4/hymnal_skol_n_4.json";
+    }else if(level2_name == "Nivel 5"){
+        var url = "json/hmnal_school/nivel_5/hymnal_skol_n_5.json";
+    }
+} else if (stud_level == "P&W Skool") {
 
+    if(level2_name == "Nivel 1"){
+        var url = "json/p_w_school/nivel_1/p_w_school_n_1.json";
+    }else if(level2_name == "Nivel 2"){
+        var url = "json/p_w_school/nivel_2/p_w_school_n_2.json";
+    }else if(level2_name == "Nivel 3"){
+        var url = "json/p_w_school/nivel_3/p_w_school_n_3.json";
+    }else if(level2_name == "Nivel 4"){
+        var url = "json/p_w_school/nivel_4/p_w_school_n_4.json";
+    }else if(level2_name == "Nivel 5"){
+        var url = "json/p_w_school/nivel_5/p_w_school_n_5.json";
+    }
+}
 
-var supportsAudio = !!document.createElement('audio').canPlayType;
+$.getJSON(url, function (data) {
+    data.forEach(function (column) {
+        const song_name =  column.name
+        const musicNameRemove = song_name.match('[^/]*$').join('');
+        const filename = musicNameRemove.replace('.mp3', '').replace('"', '');
+        const tempTemplate = { track: (++i), name: filename, duration:"",file: column.file };
+        jsonData = JSON.parse(JSON.stringify(tempTemplate));
+        target.push(jsonData);
+    });
+    var supportsAudio = !!document.createElement('audio').canPlayType;
 if (supportsAudio) {
     // initialize plyr
     var player = new Plyr('#audio1', {
@@ -99,38 +129,38 @@ if (supportsAudio) {
             'restart',
         ]
     });
+    
 
     if (stud_level == "Accord Method 1") {
-        mediaPath = '/media/audios/akord_metodo_1/'
+        mediaPath = 'media/classes_audio/akkord_methode_1/'
     } else if (stud_level == "Accord Method 2") {
-        mediaPath = '/media/audios/akord_metodo_2/'
+        mediaPath = 'media/classes_audio/akkord_methode_2/'
     } else if (stud_level == "Piano for Singers") {
-        mediaPath = '/media/audios/zangers_methode_1/'
+        mediaPath = 'media/classes_audio/piano_for_singers/'
     } else if (stud_level == "Hymnal Skool") {
         if(level2_name == "Nivel 1"){
-            mediaPath = '/media/audios/hmnal_school/nivel_1/'
+        mediaPath = 'media/classes_audio/hmnal_school/nivel_1/'
         }else if(level2_name == "Nivel 2"){
-            mediaPath = '/media/audios/hmnal_school/nivel_2/'
+            mediaPath = 'media/classes_audio/hmnal_school/nivel_2/'
         }else if(level2_name == "Nivel 3"){
-            mediaPath = '/media/audios/hmnal_school/nivel_3/'
+            mediaPath = 'media/classes_audio/hmnal_school/nivel_3/'
         }else if(level2_name == "Nivel 4"){
-            mediaPath = '/media/audios/hmnal_school/nivel_4/'
+            mediaPath = 'media/classes_audio/hmnal_school/nivel_4/'
         }else if(level2_name == "Nivel 5"){
-            mediaPath = '/media/audios/hmnal_school/nivel_5/'
+            mediaPath = 'media/classes_audio/hmnal_school/nivel_5/'
         }
-        
     } else if (stud_level == "P&W Skool") {
 
         if(level2_name == "Nivel 1"){
-            mediaPath = '/media/audios/p_w_school/nivel_1/'
+            mediaPath = 'media/classes_audio/p_w_school/nivel_1/'
         }else if(level2_name == "Nivel 2"){
-            mediaPath = '/media/audios/p_w_school/nivel_2/'
+            mediaPath = 'media/classes_audio/p_w_school/nivel_2/'
         }else if(level2_name == "Nivel 3"){
-            mediaPath = '/media/audios/p_w_school/nivel_3/'
+            mediaPath = 'media/classes_audio/p_w_school/nivel_3/'
         }else if(level2_name == "Nivel 4"){
-            mediaPath = '/media/audios/p_w_school/nivel_4/'
+            mediaPath = 'media/classes_audio/p_w_school/nivel_4/'
         }else if(level2_name == "Nivel 5"){
-            mediaPath = '/media/audios/p_w_school/nivel_5/'
+            mediaPath = 'media/classes_audio/p_w_school/nivel_5/'
         }
     }
 
@@ -232,5 +262,6 @@ if (supportsAudio) {
     var noSupport = $('#audio1').text();
     $('.container').append('<p class="no-support">' + noSupport + '</p>');
 }
+});
 
 //to do levels in hymnal skol and p&w skool
