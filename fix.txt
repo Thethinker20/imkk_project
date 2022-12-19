@@ -1,4 +1,0 @@
-Things to fix
-1. Akkord method 1 change student, no ta hasiendo change
-2. P&w audio nan no ta bai
-3. audio no ta show
