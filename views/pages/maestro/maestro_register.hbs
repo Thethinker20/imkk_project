@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Registration Maestro</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://user-images.githubusercontent.com/43387401/188338613-85b6ccb8-1ef0-4e2a-a321-1e5cfc7e8aa8.png" />
+    <script src="https://kit.fontawesome.com/14fac1d4b2.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' media='screen' href='/vendor/bootstrap/css/bootstrap.min.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/register.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="/imk/"><img
+                    src="https://user-images.githubusercontent.com/43387401/188321086-f48a3d73-ad20-406f-8dcf-a3fff2645b0e.png"
+                    alt=""></a>
+            {{!-- <h5>Leo Davelaar Muziekschool</h5> --}}
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <div class="register-header">
+                <h3>Instituto Di Musika Kristian Kòrsou</h3>
+                <p>Registrashon Maestro</p>
+            </div>
+            <form action="post" id="maestro">
+                <div class="row">
+                    <div class="col-lg-12 d-flex justify-content-center align-items-center flex-column">
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                <label for="imageUpload"></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="avatar-text text-center">Subi un potrèt di bo</h5>
+                    </div>
+                </div>
+                <div class="row mt-4 d-flex justify-content-center align-items-center flex-column">
+                    <h3 class="stud-text mb-25">Login data</h3>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label>Username</label>
+                        <input type="text" class="reg-input" placeholder="Username" name="username"
+                            id="username" disabled>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Password</label>
+                        <input type="password" class="reg-input" placeholder="Password" id="password"
+                            name="password" required>
+                        <div class="registrationFormAlert" id="CheckPasswordMatch1"></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Confirm password</label>
+                        <input type="password" class="reg-input" placeholder="Confirm password" id="passwordC"
+                            name="passwordC" required>
+                        <div class="registrationFormAlert" id="CheckPasswordMatch"></div>
+                    </div>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label>Nòmber</label>
+                        <input type="text" class="reg-input" placeholder="Nòmber" id="name" name="name"
+                            required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Fam</label>
+                        <input type="text" class="reg-input" placeholder="Fam" id="lastname" name="lastname"
+                            required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Fecha di nasementu</label>
+                        <input type="text" class="reg-input" placeholder="e.g 12/05/1998" id="age" name="age"
+                            required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Adrès</label>
+                        <input type="text" class="reg-input" placeholder="Adrès" id="address" name="address"
+                            required>
+                    </div>
+                </div>
+                <div class="row mb-25">
+                    <div class="col-lg-3">
+                        <label>Iglesia</label>
+                        <select name="igleisa" id="iglesia" class="reg-input">
+                            <option value="" disabled selected>Selekta bo iglesia</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label> Bo telefòn</label>
+                        <input type="text" class="reg-input" placeholder="Telefòn" name="mobile" id="mobile"
+                            required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Email</label>
+                        <input type="text" class="reg-input" placeholder="Email" id="email" name="email"
+                            required>
+                    </div>
+                </div>
+                <div class="row mb-25 mt-5">
+                    <p class="text-uppercase font-weight-bold mt-4">Lesa e termino i kondishon nan aki prome bo sigui,
+                        klik riba termino i kondishon pa por lesanan.</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" required
+                            oninvalid="this.setCustomValidity('Checke box pa sigui')"
+                            oninput="this.setCustomValidity('')">
+                        <label class="form-check-label font-weight-normal">
+                            Mi ta bai di akuerdo ku e <a href="" download="/document/term_condition_pap.pdf">termino i
+                                kondishonnan</a>.
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="reg-sendButton">Manda</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="footer">
+        <div class="lowerbar">
+            <p>@Instituto di Musika Kristian Kòrsou</p>
+        </div>
+    </section>
+    <div class="modal_body">
+        <div id="modal-container" class="six">
+            <div class="modal-background">
+                <div class="modal_pre">
+                    <h2>Bon Bini</h2>
+                    <p>Registra aki pa por<br> kuminsa ku bo lès piano</p>
+                    <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                        preserveAspectRatio="none">
+                        <rect x="0" y="0" fill="none" width="316" height="200" rx="3" ry="3"></rect>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.all.min.js"></script>
+<script src='/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script src='/js/maestro/maestro_reg.js'></script>
+
+</html>

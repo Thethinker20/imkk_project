@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 // User's Atributes
 const studentPSchema = new mongoose.Schema({
+  maestro: {
+    type: String,
+    required: false,
+  },
   lang: {
     type: String,
     required: true,

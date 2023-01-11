@@ -142,7 +142,26 @@ async function login(event) {
         title: result.error,
       })
     )
-  } else {
+  }else if(username.substring(0, 3) == "mae"){
+    const result = await fetch("/imk/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    }).then((res) => res.json());
+    if (result.status === "ok") {
+      window.location.replace("/imk/maestro_home");
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: result.error,
+      });
+    }
+  }else {
     Swal.fire({
       icon: "error",
       title: "Username does not exist!",

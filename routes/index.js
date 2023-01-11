@@ -57,6 +57,20 @@ router.get("/imk/language_reg", (req, res) => {
     res.render("pages/student/student_audio_neth", { layout: false });
   });
 
+ //maestro
+ router.get("/imk/maestro_home", (req, res) => {
+  res.render("pages/maestro/maestro_home", { layout: false });
+});
+router.get("/imk/maestro_students", (req, res) => {
+  res.render("pages/maestro/maestro_students", { layout: false });
+});
+router.get("/imk/maestro_register", (req, res) => {
+  res.render("pages/maestro/maestro_register", { layout: false });
+});
+router.get("/imk/maestro_admin", (req, res) => {
+  res.render("pages/admin/maestro_admin", { layout: false });
+});
+
   //email temp
   router.get("/imk/email_temp", (req, res) => {
     res.render("email", { layout: false });

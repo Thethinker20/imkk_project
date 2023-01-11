@@ -17,6 +17,7 @@ const AccordMethod2 = require("./routes/models/accord_method_2");
 const PianoSinger = require("./routes/models/singers");
 const HynmalSkool = require("./routes/models/hymnal");
 const PWSkool = require("./routes/models/p&w");
+const Maestro = require("./routes/models/maestro");
 const fs = require("fs");
 var nodemailer = require('nodemailer');
 var hbs_mail = require('nodemailer-express-handlebars');
@@ -149,7 +150,30 @@ app.post("/imk/login", async (req, res) => {
     } else {
       res.json({ status: "404", error: "Password fout" });
     }
-  } else {
+  }else if(username.substring(0, 3) == "mae"){
+    console.log(username);
+    const maestro = await Maestro.findOne({ username }).lean();
+    if (await bcrypt.compare(password, maestro.password)) {
+      const token = jwt.sign(
+        {
+          id: maestro._id,
+          username_pap: maestro.username,
+          name_pap: maestro.name,
+          lastname_pap: maestro.lastname,
+          address_pap: maestro.address,
+          iglesia: maestro.iglesia,
+          email_pap: maestro.email,
+          age_pap: maestro.age,
+          telefoon_pap: maestro.telefoon,
+          student: maestro.student,
+        },
+        JWT_SECRET
+      );
+      res.json({ status: "ok", data: token});
+    } else {
+      res.json({ status: "404", error: "Password fout" });
+    }
+  }else {
     res.json({ status: "404", error: "Username does not exist!" });
   }
 });
@@ -1445,7 +1469,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_AccordMethod1P18) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          AccordMethod1.deleteOne({ _id: student_id });
+          AccordMethod1.deleteOne({ student: student_id });
           const update_ex = await Student_pap.updateOne({ _id: student_id }, { level: "Accord Method 2" });
           if (update_ex) {
             const student = new AccordMethod2(accordMethod1);
@@ -1462,7 +1486,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_piano_singer) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          AccordMethod1.deleteOne({ _id: student_id });
+          AccordMethod1.deleteOne({ student: student_id });
           const update_ex = await Student_pap.updateOne({ _id: student_id }, { level: "Piano for Singer" });
 
           if (update_ex) {
@@ -1479,7 +1503,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_hynmal_skool) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          AccordMethod1.deleteOne({ _id: student_id });
+          AccordMethod1.deleteOne({ student: student_id });
           const update_ex = await Student_pap.updateOne({ _id: student_id }, { level: "Hymnal Skool" });
           if (update_ex) {
             const student = new HynmalSkool(accordMethod1);
@@ -1495,7 +1519,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_pw_skool) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          AccordMethod1.deleteOne({ _id: student_id });
+          AccordMethod1.deleteOne({ student: student_id });
           const update_ex = await Student_pap.updateOne({ _id: student_id }, { level: "P&W Skool" });
           if (update_ex) {
             const student = new PWSkool(accordMethod1);
@@ -1514,7 +1538,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_AccordMethod1) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          AccordMethod2.deleteOne({ _id: student_id });
+          AccordMethod2.deleteOne({ student: student_id });
           const updatesuc = await Student_pap.updateOne({ _id: student_id }, { level: "Accord Method 1" });
           if (updatesuc) {
             const student = new AccordMethod1(accordMethod1);
@@ -1530,7 +1554,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          AccordMethod2.deleteOne({ _id: student_id });
+          AccordMethod2.deleteOne({ student: student_id });
           const updatesuc = await Student_pap.updateOne({ _id: student_id }, { level: "Piano for Singer" });
           if (updatesuc) {
             const student = new PianoSinger(accordMethod1);
@@ -1546,7 +1570,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          AccordMethod2.deleteOne({ _id: student_id });
+          AccordMethod2.deleteOne({ student: student_id });
           const updatesuc = await Student_pap.updateOne({ _id: student_id }, { level: "Hymnal Skool" });
           if (updatesuc) {
             const student = new HynmalSkool(accordMethod1);
@@ -1562,7 +1586,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          AccordMethod2.deleteOne({ _id: student_id });
+          AccordMethod2.deleteOne({ student: student_id });
           const updatesuc = await Student_pap.updateOne({ _id: student_id }, { level: "P&W Skool" });
           if (updatesuc) {
             const student = new PWSkool(accordMethod1);
@@ -1581,7 +1605,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          PianoSinger.deleteOne({ _id: student_id });
+          PianoSinger.deleteOne({ student: student_id });
           const update_exist = await Student_pap.updateOne({ _id: student_id }, { level: "Accord Method 1" });
           if (update_exist) {
             const student = new AccordMethod1(accordMethod1);
@@ -1597,7 +1621,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          PianoSinger.deleteOne({ _id: student_id });
+          PianoSinger.deleteOne({ student: student_id });
           const update_exist = await Student_pap.updateOne({ _id: student_id }, { level: "Accord Method 2" });
           if (update_exist) {
             const student = new AccordMethod2(accordMethod1);
@@ -1613,7 +1637,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          PianoSinger.deleteOne({ _id: student_id });
+          PianoSinger.deleteOne({ student: student_id });
           const update_exist = await Student_pap.updateOne({ _id: student_id }, { level: "Hymnal Skool" });
           if (update_exist) {
             const student = new HynmalSkool(accordMethod1);
@@ -1630,7 +1654,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          PianoSinger.deleteOne({ _id: student_id });
+          PianoSinger.deleteOne({ student: student_id });
           const update_exist = await Student_pap.updateOne({ _id: student_id }, { level: "P&W Skool" });
           if (update_exist) {
             const student = new PWSkool(accordMethod1);
@@ -1649,7 +1673,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          HynmalSkool.deleteOne({ _id: student_id });
+          HynmalSkool.deleteOne({ student: student_id });
           const update_exist = await Student_pap.updateOne({ _id: student_id }, { level: "Accord Method 1" });
           if (update_exist) {
             const student = new AccordMethod1(accordMethod1);
@@ -1666,7 +1690,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          HynmalSkool.deleteOne({ _id: student_id });
+          HynmalSkool.deleteOne({ student: student_id });
           const update_exist = await Student_pap.updateOne({ _id: student_id }, { level: "Accord Method 2" });
           if (update_exist) {
             const student = new AccordMethod2(accordMethod1);
@@ -1683,7 +1707,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          HynmalSkool.deleteOne({ _id: student_id });
+          HynmalSkool.deleteOne({ student: student_id });
           const update_exist = await Student_pap.updateOne({ _id: student_id }, { level: "Piano for Singer" });
           if (update_exist) {
             const student = new PianoSinger(accordMethod1);
@@ -1700,7 +1724,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          HynmalSkool.deleteOne({ _id: student_id });
+          HynmalSkool.deleteOne({ student: student_id });
           const update_exist = await Student_pap.updateOne({ _id: student_id }, { level: "P&W Skool" });
           if (update_exist) {
             const student = new PWSkool(accordMethod1);
@@ -1730,7 +1754,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          PWSkool.deleteOne({ _id: student_id });
+          PWSkool.deleteOne({ student: student_id });
           const update_exist = await Student_pap.updateOne({ _id: student_id }, { level: "Accord Method 1" });
           if (update_exist) {
             const student = new AccordMethod1(accordMethod1);
@@ -1747,7 +1771,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          PWSkool.deleteOne({ _id: student_id });
+          PWSkool.deleteOne({ student: student_id });
           const update_exist = await Student_pap.updateOne({ _id: student_id }, { level: "Accord Method 2" });
           if (update_exist) {
             const student = new AccordMethod2(accordMethod1);
@@ -1763,7 +1787,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          PWSkool.deleteOne({ _id: student_id });
+          PWSkool.deleteOne({ student: student_id });
           const update_exist = await Student_pap.updateOne({ _id: student_id }, { level: "Piano for Singer" });
           if (update_exist) {
             const student = new PianoSinger(accordMethod1);
@@ -1780,7 +1804,7 @@ app.post("/imk/change_level", async (req, res) => {
         if (!student_exist) {
           return res.send({ status: 404, msg: "Student is already in this class" });
         } else {
-          PWSkool.deleteOne({ _id: student_id });
+          PWSkool.deleteOne({ student: student_id });
           const update_exist = await Student_pap.updateOne({ _id: student_id }, { level: "Hymnal Skool" });
           if (update_exist) {
             const student = new HynmalSkool(accordMethod1);
@@ -2242,6 +2266,329 @@ app.post("/imk/is_paid_stud", async (req, res) => {
   }
 
 });
+
+//maestro
+app.post("/imk/register_maestro", async (req, res) => {
+  const {
+    username,
+    password: plainTextPassword,
+    passwordC: plainTextPasswordC,
+    name,
+    lastname,
+    address,
+    iglesia,
+    email,
+    age,
+    mobile,
+  } = req.body;
+
+  const password = await bcrypt.hash(plainTextPassword, 10);
+  const passwordC = await bcrypt.hash(plainTextPasswordC, 10);
+
+  try {
+    const response = await Maestro.create({
+      username,
+      password,
+      passwordC,
+      name,
+      lastname,
+      address,
+      iglesia,
+      email,
+      age,
+      mobile,
+    });
+
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      from: "imkk2021@yahoo.com",
+      auth: {
+        user: "ld.muziekschool@gmail.com",
+        pass: "swqeaarjbnqhyzxr",
+      },
+
+    });
+
+    //,carldave01@gmail.com 
+
+    let mailOption = {
+      from: "imkk2021@yahoo.com",
+      to: `${email}`,
+      subject: "Instituto di Musika Kristian Korsou",
+      html: `<html lang="en">
+
+      <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <title>Register IMKK</title>
+      
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      
+          <style>
+              .ReadMsgBody {
+                  width: 100%;
+                  background-color: #ffffff;
+              }
+      
+              .ExternalClass {
+                  width: 100%;
+                  background-color: #ffffff;
+              }
+      
+              /* Windows Phone Viewport Fix */
+              @-ms-viewport {
+                  width: device-width;
+              }
+          </style>
+      
+      
+      </head>
+      
+      <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"
+          style="background: #e7e7e7; width: 100%; height: 100%; margin: 0; padding: 0;">
+          <!-- Mail.ru Wrapper -->
+          <div id="mailsub">
+              <!-- Wrapper -->
+              <center class="wrapper"
+                  style="table-layout: fixed; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; padding: 0; margin: 0 auto; width: 100%; max-width: 960px;">
+                  <!-- Old wrap -->
+                  <div class="webkit">
+                      <table cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff"
+                          style="padding: 0; margin: 0 auto; width: 100%; max-width: 960px;">
+                          <tbody>
+                              <tr>
+                                  <td align="center">
+                                      <!-- Start Section (1 column) -->
+                                      <table id="intro" cellpadding="0" cellspacing="0" border="0" bgcolor="#4F6331"
+                                          align="center"
+                                          style="width: 100%; padding: 0; margin: 0; background-image: url(https://user-images.githubusercontent.com/43387401/184557621-22faf6aa-1a93-4541-ac18-080bcbc16014.jpg?raw=true); background-size: auto 102%; background-position: center center; background-repeat: no-repeat; background-color: #080e02">
+                                          <tbody>
+                                              <tr>
+                                                  <td colspan="3" height="20"></td>
+                                              </tr>
+                                              <tr>
+                                                  <td width="330" style="width: 33%;"></td>
+                                                  <!-- Logo -->
+                                                  <td width="300" style="width: 30%;" align="center">
+                                                      <a href="#" target="_blank" border="0"
+                                                          style="border: none; display: block; outline: none; text-decoration: none; line-height: 60px; height: 60px; color: #ffffff; font-family: Verdana, Geneva, sans-serif;  -webkit-text-size-adjust:none;">
+                                                          <img src="https://user-images.githubusercontent.com/43387401/187322248-f0536156-8916-4edc-a809-e73a36387ba0.png?raw=true"
+                                                              alt="One Letter" width="100" height="80" border="0"
+                                                              style="border: none; display: block; -ms-interpolation-mode: bicubic;">
+                                                      </a>
+                                                  </td>
+                                                  <!-- Social Button -->
+                                                  <td width="330" style="width: 33%;" align="right">
+                                                      <div style="text-align: center; max-width: 150px; width: 100%;">
+                                                          <span>&nbsp;</span>
+                                                          <a href="#" target="_blank" border="0"
+                                                              style="border: none; outline: none; text-decoration: none; line-height: 60px; color: #ffffff; font-family: Verdana, Geneva, sans-serif;  -webkit-text-size-adjust:none">
+                                                              <img src="https://github.com/lime7/responsive-html-template/blob/master/index/f.png?raw=true"
+                                                                  alt="facebook.com" border="0" width="11" height="23"
+                                                                  style="border: none; outline: none; -ms-interpolation-mode: bicubic;">
+                                                          </a>
+                                                          <span>&nbsp;</span>
+                                                          <a href="#" target="_blank" border="0"
+                                                              style="border: none; outline: none; text-decoration: none; line-height: 60px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; -webkit-text-size-adjust:none">
+                                                              <img src="https://github.com/lime7/responsive-html-template/blob/master/index/vk.png?raw=true"
+                                                                  alt="vk.com" border="0" width="39" height="23"
+                                                                  style="border: none; outline: none; -ms-interpolation-mode: bicubic;">
+                                                          </a>
+                                                          <span>&nbsp;</span>
+                                                          <a href="#" target="_blank" border="0"
+                                                              style="border: none; outline: none; text-decoration: none; line-height: 60px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; -webkit-text-size-adjust:none;">
+                                                              <img src="https://github.com/lime7/responsive-html-template/blob/master/index/g+.png?raw=true"
+                                                                  alt="google.com" border="0" width="23" height="23"
+                                                                  style="border: none; outline: none; -ms-interpolation-mode: bicubic;">
+                                                          </a>
+                                                          <span>&nbsp;</span>
+                                                      </div>
+                                                  </td>
+                                              </tr>
+                                              <tr>
+                                                  <td colspan="3" height="100"></td>
+                                              </tr>
+                                              <!-- Main Title -->
+                                              <tr>
+                                                  <td colspan="3" height="60" align="center">
+                                                      <div border="0"
+                                                          style="border: none; line-height: 60px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 52px; text-transform: uppercase; font-weight: bolder;">
+                                                          Hi, ${name}!</div>
+                                                  </td>
+                                              </tr>
+                                              <!-- Line 1 -->
+                                              <tr>
+                                                  <td colspan="3" height="20" valign="bottom" align="center">
+                                                      <img src="https://github.com/lime7/responsive-html-template/blob/master/index/line-1.png?raw=true"
+                                                          alt="line" border="0" width="464" height="5"
+                                                          style="border: none; outline: none; max-width: 464px; width: 100%; -ms-interpolation-mode: bicubic;">
+                                                  </td>
+                                              </tr>
+                                              <!-- Meta title -->
+                                              <tr>
+                                                  <td colspan="3">
+                                                      <table cellpadding="0" cellspacing="0" border="0" align="center"
+                                                          style="padding: 0; margin: 0; width: 100%;">
+                                                          <tbody>
+                                                              <tr>
+                                                                  <td width="90" style="width: 9%;"></td>
+                                                                  <td align="center">
+                                                                      <div border="0" style="border: none; height: 60px;">
+                                                                          <p
+                                                                              style="font-size: 18px; line-height: 24px; font-family: Verdana, Geneva, sans-serif; color: #ffffff; text-align: center; mso-table-lspace:0;mso-table-rspace:0;">
+                                                                              Bon bini na Instituto di Musika Kristian Korsou,
+                                                                              awor bo ta parti di e gran tim di pianista
+                                                                              maestro, nos ta kontentu ku ba registra.
+                                                                          </p>
+                                                                      </div>
+                                                                  </td>
+                                                                  <td width="90" style="width: 9%;"></td>
+                                                              </tr>
+                                                          </tbody>
+                                                      </table>
+                                                  </td>
+                                              </tr>
+                                              <tr>
+                                                  <td colspan="3" height="160"></td>
+                                              </tr>
+                                              <tr>
+                                                  <td width="330"></td>
+                                                  <!-- Button Start -->
+                                                  <td width="300" align="center" height="52">
+                                                      <div
+                                                          style="background-image: url(https://github.com/lime7/responsive-html-template/blob/master/index/intro__btn.png?raw=true); background-size: 100% 100%; background-position: center center; width: 225px;">
+                                                          <a href="https://imkk-project.herokuapp.com/login" target="_blank"
+                                                              width="160" height="52" border="0" bgcolor="#009789"
+                                                              style="border: none; outline: none; display: block; width:160px; height: 52px; text-transform: uppercase; text-decoration: none; font-size: 17px; line-height: 52px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; text-align: center; background-color: #009789;  -webkit-text-size-adjust:none;">
+                                                              LogIn now
+                                                          </a>
+                                                      </div>
+                                                  </td>
+                                                  <td width="330"></td>
+                                              </tr>
+                                              <tr>
+                                                  <td colspan="3" height="85"></td>
+                                              </tr>
+                                          </tbody>
+                                      </table><!-- End Start Section -->
+                                      <!-- Icon articles (4 columns) -->
+                                      <div id="icon__article" class="device" cellpadding="0" cellspacing="0" border="0"
+                                          bgcolor="#ffffff" align="center"
+                                          style="width: 100%; padding: 0; margin: 0; background-color: #ffffff">
+      
+                                          <h4
+                                              style="font-size: 18px; line-height: 24px; font-family: Verdana, Geneva, sans-serif; color: black; text-align: center; mso-table-lspace:0;mso-table-rspace:0;">
+                                              Mi Credentials</h4>
+                                          <div
+                                              style="display: flex; font-family: Verdana, Geneva, sans-serif; color: black; justify-content:center; width:100%;">
+                                              <p style="padding-left: 25px;">Your username: ${username}</p>
+                                              <p style="padding-left: 25px;">Your password: ${plainTextPassword}</p>
+                                          </div>
+      
+                                      </div> <!-- End Icon articles -->
+      
+                                      <!-- Footer -->
+                                      <table id="news__article" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff"
+                                          align="center"
+                                          style="width: 100%; padding: 0; margin: 0; background-color: #ffffff">
+                                          <tbody>
+                                              <tr>
+                                                  <td colspan="3" height="23"></td>
+                                              </tr>
+                                              <tr>
+                                                  <td align="center">
+                                                      <div border="0"
+                                                          style="border: none; line-height: 14px; color: #727272; font-family: Verdana, Geneva, sans-serif; font-size: 16px;">
+                                                          2022 © <a href="" target="_blank" border="0"
+                                                              style="border: none; outline: none; text-decoration: none; line-height: 14px; font-size: 16px; color: #727272; font-family: Verdana, Geneva, sans-serif; -webkit-text-size-adjust:none;">Leo
+                                                              Davelaar Muziekschool</a>
+                                                      </div>
+                                                  </td>
+                                              </tr>
+                                              <tr>
+                                                  <td colspan="3" height="23"></td>
+                                              </tr>
+                                          </tbody>
+                                      </table> <!-- End Footer -->
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div> <!-- End Old wrap -->
+              </center> <!-- End Wrapper -->
+          </div> <!-- End Mail.ru Wrapper -->
+      </body>
+      
+      </html>`
+    };
+
+    transporter.sendMail(mailOption, function (err, res) {
+      if (err) {
+        res.send({ error: "Send mail error contact administrator!" })
+      }
+    });
+
+    res.send({ status: "202", data: "Registrashon kompleta" });
+  } catch (error) {
+    if (error.code === 11000) {
+      // duplicate key
+      return res.send({ status: "402", error: "Studiante ta existi kaba" });
+    }
+    throw error;
+  }
+});
+
+app.get("/imk/get_maestro", async (req, res) => {
+  Maestro.find()
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.post("/imk/add_student_to_maestro", async (req, res) =>{
+  const {stud_id,maestro_id} = req.body;
+
+  const maestro = await Maestro.find({ _id: maestro_id });
+  let students = maestro[0].student;
+  let studentExist = students.filter((student) => student == stud_id);
+  if (studentExist.length > 0) {
+    res.send({
+      status: "201",
+      msg: "Student already assign to teacher",
+    });
+  }else{
+    const addStudent = await Maestro.findByIdAndUpdate(
+      { _id: maestro_id },
+      { $push: { student: stud_id } }
+    );
+    const addMtoS = await Student_pap.updateOne(
+      { _id: stud_id },
+      {  maestro: maestro_id }
+    );
+    res.send({
+      status: "202",
+      msg: "Student assign to teacher",
+    });
+  }
+});
+
+app.post("/imk/students_of_maestro", async (req, res) =>{
+  const {mae_id} = req.body;
+  Maestro.find({ _id: { $in: mae_id } }, function (err, stud) {
+    var studArray = [];
+    for (var key in stud) {
+      var data_stud = stud[key].student;
+      studArray = studArray.concat(data_stud);
+    }
+    Student_pap.find({ _id: { $in: studArray } }, function (err, studs) {
+      res.send(studs);
+    });
+  });
+});
+
 
 // Routes
 app.use(require("./routes"));
