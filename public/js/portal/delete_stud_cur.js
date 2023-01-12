@@ -62,6 +62,7 @@ function get_table() {
                 var name = response[i]['name_pap'];
 
                 $("#student_name").append("<option value='" + id + "'>" + name + "</option>");
+                $("#modal_student").append("<option value='" + id + "'>" + name + "</option>");
             }
         },
         error: function (response) {
@@ -104,6 +105,39 @@ async function changeLevel(event) {
         });
     }
 }
+
+const form_m = document.getElementById("delete_stud_modal");
+form_m.addEventListener("submit", delete_student_m);
+
+async function delete_student_m(event) {
+    event.preventDefault();
+    const student_id_m = document.getElementById('modal_student').value;
+    
+    const result = await fetch("/imk/delete_student_pap", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            student_id_m
+        }),
+    }).then((res) => res.json());
+    if(result.status == "202"){
+        Swal.fire({
+            icon: "success",
+            title: result.msg,
+        });
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
+    }else{
+        Swal.fire({
+            icon: "error",
+            title: result.msg,
+        });
+    }
+}
+
 
 
 // $('#update_btn').on('click', async function () {

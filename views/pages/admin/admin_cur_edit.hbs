@@ -125,7 +125,36 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-end p-3">
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#delete_student">Delete</button>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="delete_student" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Delete maestro
+                                    </h5>
+                                    <button type="button" class="btn-close" data-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="delete_stud_modal" action="post">
+                                        <div >
+                                            <div class="row pb-1 pt-2" >
+                                                <div class="col-lg-12">
+                                                    <label class="exampleFormControlInput1">Nòmber</label>
+                                                    <select id="modal_student" class="form-control " required>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">

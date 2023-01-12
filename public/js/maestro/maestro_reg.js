@@ -132,7 +132,7 @@ async function add_maestro(event) {
             title: result.data,
         });
         setTimeout(() => {
-            window.location.replace("/login");
+            window.location.replace("/imk/login");
         }, 3000);
     } else {
         Swal.fire({

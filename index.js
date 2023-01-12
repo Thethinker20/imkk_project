@@ -2584,9 +2584,60 @@ app.post("/imk/students_of_maestro", async (req, res) =>{
       studArray = studArray.concat(data_stud);
     }
     Student_pap.find({ _id: { $in: studArray } }, function (err, studs) {
-      res.send(studs);
+      res.send({data : studs});
     });
   });
+});
+
+app.post("/imk/delete_maestro", async(req, res) =>{
+  const {maestro_id_m} = req.body;
+
+  try{
+    Maestro.findOneAndDelete(maestro_id_m, (err, doc) => {
+      if (!err) {
+        res.send({status:"202",msg:"Maestro has been removed!"});
+      } else {
+        res.send({status:"404",msg:"Maestro not removed!"});
+      }
+    })
+  }catch(e){
+    res.send(e)
+  }
+
+});
+
+app.post("/imk/delete_student_pap", async(req, res) =>{
+  const {student_id_m} = req.body;
+
+  try{
+    Student_pap.findOneAndDelete(student_id_m, (err, doc) => {
+      if (!err) {
+        res.send({status:"202",msg:"Student has been removed!"});
+      } else {
+        res.send({status:"404",msg:"Student not removed!"});
+      }
+    })
+  }catch(e){
+    res.send(e)
+  }
+
+});
+
+app.post("/imk/delete_s_m", async(req, res) =>{
+  const {maestro_id_d, stud_id_d} = req.body;
+
+  try{
+    Maestro.findOneAndDelete(maestro_id_m, (err, doc) => {
+      if (!err) {
+        res.send({status:"202",msg:"Maestro has been removed!"});
+      } else {
+        res.send({status:"404",msg:"Maestro not removed!"});
+      }
+    })
+  }catch(e){
+    res.send(e)
+  }
+
 });
 
 

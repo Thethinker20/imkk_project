@@ -62,6 +62,7 @@ function get_maestro_name() {
                 $("#maestro_add").append("<option value='" + id + "'>" + name + "</option>");
                 $("#maestro_addC").append("<option value='" + id + "'>" + name + "</option>");
                 $("#students_maestro").append("<option value='" + id + "'>" + name + "</option>");
+                $("#modal_maestro").append("<option value='" + id + "'>" + name + "</option>");
             }
             table = $("#maestro_tb").DataTable({
                 responsive: true,
@@ -121,6 +122,38 @@ async function add_s_maestro(event) {
     }
 }
 
+const form_m = document.getElementById("delete_mae_modal");
+form_m.addEventListener("submit", delete_maestro_m);
+
+async function delete_maestro_m(event) {
+    event.preventDefault();
+    const maestro_id_m = document.getElementById('modal_maestro').value;
+    
+    const result = await fetch("/imk/delete_maestro", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            maestro_id_m
+        }),
+    }).then((res) => res.json());
+    if(result.status == "202"){
+        Swal.fire({
+            icon: "success",
+            title: result.msg,
+        });
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
+    }else{
+        Swal.fire({
+            icon: "error",
+            title: result.msg,
+        });
+    }
+}
+
 // $("#student_nameC").change(function () {
 //     const stud_id = document.getElementById('student_name').value;
 
@@ -135,10 +168,10 @@ async function add_s_maestro(event) {
 //     }).then((res) => res.json());
 // });
 
-$("#students_maestro").change(function(){
+$("#students_maestro").change(async function(){
     const mae_id = document.getElementById('students_maestro').value;
 
-    const result = fetch("/imk/students_of_maestro", {
+    const result = await fetch("/imk/students_of_maestro", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -147,12 +180,24 @@ $("#students_maestro").change(function(){
             mae_id
         }),
     }).then((res) => res.json());
-    console.log(result);
+    
+    const data_students = result.data;
+    var data_new = [{
+        'student': ''
+    }];
+
+    for(var i in data_students){
+        var obj = {'student' : result.data[i].name_pap}
+        data_new.push(obj)
+    }
+
+    
+
     const table_s = document.querySelector('#students_maestro_tb');
     table_s.style.display = 'block';
     table = $("#students_maestro_tb").DataTable({
         responsive: true,
-        data: result,
+        data: data_new,
         columns: [
             { data: "student" }
         ],
@@ -160,6 +205,9 @@ $("#students_maestro").change(function(){
         bInfo: false,
         bAutoWidth: false,
         destroy: true,
+        columnDefs: [
+            { width: '12%', targets: 0 }
+        ],
     });
 
 });

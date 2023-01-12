@@ -125,7 +125,36 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-end p-3">
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#delete_maestro">Delete</button>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="delete_maestro" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Delete maestro
+                                    </h5>
+                                    <button type="button" class="btn-close" data-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="delete_mae_modal" action="post">
+                                        <div >
+                                            <div class="row pb-1 pt-2" >
+                                                <div class="col-lg-12">
+                                                    <label class="exampleFormControlInput1">Nòmber</label>
+                                                    <select id="modal_maestro" class="form-control " required>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -145,46 +174,45 @@
 
                                     <p><b>Add student to maestro</b></p>
                                     <form action="post" id="add_s_to_m" class="d-flex pb-4">
-                                        <div class="col-md-3">
+                                        <div class="col-lg-4">
                                             <label class="pb-2">Student Name</label>
-                                            <select name="stud_name" id="student_name" class="form-control" required>
+                                            <select name="stud_name" id="student_name" class="form-control mr-2" required>
                                                 <option value="" disabled selected>Student Name</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-lg-4">
                                             <label class="pb-2">Maestro</label>
-                                            <select name="maestro" id="maestro_add" class="form-control" required>
+                                            <select name="maestro" id="maestro_add" class="form-control mr-2" required>
                                                 <option value="" disabled selected>Maestro</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-lg-4">
                                             <label class="pb-4 w-100"></label>
-                                            <button class="btn btn-primary" type="submit" id="update_btn">Add</button>
+                                            <button class="btn btn-primary mr-2" type="submit" id="update_btn">Add</button>
+                                        </div>
+                                    </form>
+
+                                    <p><b>Remove student from maestro</b></p>
+                                    <form action="post" id="remove_s_to_m" class="d-flex">
+                                        <div class="col-lg-4">
+                                            <label class="pb-2">Student Name</label>
+                                            <select name="stud_name" id="student_nameRe" class="form-control" required>
+                                                <option value="" disabled selected>Student Name</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="pb-2">Maestro</label>
+                                            <select name="maestro" id="maestro_reC" class="form-control" required>
+                                                <option value="" disabled selected>Maestro</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="pb-4 w-100"></label>
+                                            <button class="btn btn-primary" type="submit"
+                                                id="update_btn">Remove</button>
                                         </div>
 
                                     </form>
-
-                                    {{!-- <p><b>Change student maestro</b></p>
-                                    <form action="post" id="change_s_to_m" class="d-flex">
-                                        <div class="col-md-3">
-                                            <label class="pb-2">Student Name</label>
-                                            <select name="stud_name" id="student_nameC" class="form-control" required>
-                                                <option value="" disabled selected>Student Name</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="pb-2">Maestro</label>
-                                            <select name="maestro" id="maestro_addC" class="form-control" required>
-                                                <option value="" disabled selected>Maestro</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="pb-4 w-100"></label>
-                                            <button class="btn btn-primary" type="submit"
-                                                id="update_btn">Change</button>
-                                        </div>
-
-                                    </form> --}}
                                 </div>
                             </div>
                         </div>
@@ -196,15 +224,15 @@
                             </div> --}}
                             <div class="card-body p3 text-left">
                                 <div class="row p-2">
-                                    <h4>See</h4>
-                                    <p class="pb-3">See student of a Maestro</p>
+                                    <h4>View</h4>
+                                    <p class="pb-3">View student of a Maestro</p>
                                     <div class="col-lg-12 pb-3">
                                         <label class="pb-2">Search Maestro</label>
                                         <select id="students_maestro" class="form-control" required>
                                             <option value="" disabled selected>Maestro</option>
                                         </select>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 pb-3">
                                         <table id="students_maestro_tb" class="table table-bordered tableCol"
                                             style="margin-top: 0px !important; display: none">
                                             <thead class="text-white table_head">
@@ -228,6 +256,7 @@
                                 <h6 class="m-0">Students</h6>
                             </div> --}}
                             <div class="card-body p-0 pb-3 text-left">
+                                <h3 class="p-4">Maestronan</h3>
                                 <table id="maestro_tb" class="table table-bordered tableCol"
                                     style="margin-top: 0px !important;">
                                     <thead class="text-white table_head">
